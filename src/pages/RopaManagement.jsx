@@ -5,10 +5,14 @@ import {
   FaEye, FaTrash, FaCopy, FaDownload, FaSort,
   FaExclamationTriangle, FaCheckCircle, FaClock
 } from 'react-icons/fa';
+import RopaDetailModal from '../components/RopaDetailModal';
+import RopaEditModal from '../components/RopaEditModal';
 import '../styles/RopaManagement.css';
 
 const RopaManagement = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [editingRecord, setEditingRecord] = useState(null);
   
   const ropaRecords = [
     {
@@ -17,9 +21,29 @@ const RopaManagement = () => {
       department: "Sales & Marketing",
       processingPurpose: "Customer relationship management",
       legalBasis: "Legitimate Interest",
+      legalBasisDetails: "Business improvement and customer service optimization",
+      liaRequired: true,
+      dataSubjects: ["Customers", "Prospects"],
+      dataCategories: ["Contact Details", "Purchase History", "Preferences"],
+      specialCategories: [],
+      dataVolume: "~50,000 records",
+      retentionPeriod: "5 years",
+      retentionJustification: "Legal and business requirements",
+      securityMeasures: ["Encryption", "Access Controls", "Regular Audits"],
+      accessControls: "Role-based access control",
+      internalRecipients: ["Sales Team", "Marketing Team", "Customer Service"],
+      recipients: ["CRM System", "Marketing Platform"],
+      transfers: ["EU", "UK"],
+      transferSafeguards: "Standard Contractual Clauses",
+      dpiaRequired: true,
+      dpiaStatus: "Completed",
+      privacyNoticeLink: "/privacy/customers",
+      relatedPolicies: ["Data Protection Policy", "Retention Policy"],
       lastUpdated: "2024-02-20",
       status: "Active",
       riskLevel: "Low",
+      createdBy: "Alice Johnson",
+      dpo: "Jane Smith"
     },
     {
       id: 2,
@@ -124,6 +148,29 @@ const RopaManagement = () => {
       default:
         return null;
     }
+  };
+
+  const handleViewRecord = (record) => {
+    setSelectedRecord(record);
+  };
+
+  const handleEditRecord = (record) => {
+    setEditingRecord(record);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedRecord(null);
+    setEditingRecord(null);
+  };
+
+  const handleSaveRecord = (updatedRecord) => {
+    console.log('Saving updated record:', updatedRecord);
+    
+    const updatedRecords = ropaRecords.map(record => 
+      record.id === updatedRecord.id ? updatedRecord : record
+    );
+    
+    setEditingRecord(null);
   };
 
   return (
@@ -233,10 +280,18 @@ const RopaManagement = () => {
                   <td>{record.lastUpdated}</td>
                   <td>
                     <div className="action-buttons">
-                      <button className="action-btn" title="View">
+                      <button 
+                        className="action-btn" 
+                        title="View"
+                        onClick={() => handleViewRecord(record)}
+                      >
                         <FaEye />
                       </button>
-                      <button className="action-btn" title="Edit">
+                      <button 
+                        className="action-btn" 
+                        title="Edit"
+                        onClick={() => handleEditRecord(record)}
+                      >
                         <FaEdit />
                       </button>
                       <button className="action-btn" title="Duplicate">
@@ -253,6 +308,21 @@ const RopaManagement = () => {
           </table>
         </div>
       </div>
+
+      {selectedRecord && (
+        <RopaDetailModal 
+          record={selectedRecord} 
+          onClose={handleCloseModal} 
+        />
+      )}
+
+      {editingRecord && (
+        <RopaEditModal
+          record={editingRecord}
+          onClose={handleCloseModal}
+          onSave={handleSaveRecord}
+        />
+      )}
     </div>
   );
 };

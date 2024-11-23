@@ -1,0 +1,144 @@
+.edit-modal {
+  background: var(--color-deep-blue);
+  width: 95%;
+  max-width: 1200px;
+}
+
+.edit-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.required {
+  color: #ff4d4d;
+  margin-left: 0.25rem;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-teal-light);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.error {
+  border-color: #ff4d4d !important;
+}
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 0.8rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  width: 100%;
+}
+
+.save-button,
+.cancel-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-button {
+  background: var(--color-teal-green);
+  color: white;
+  border: none;
+}
+
+.save-button:hover {
+  background: var(--color-teal-light);
+  transform: translateY(-2px);
+}
+
+.cancel-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cancel-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .edit-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .edit-section {
+    padding: 1rem;
+  }
+  
+  .footer-content {
+    flex-direction: column-reverse;
+  }
+  
+  .save-button,
+  .cancel-button {
+    width: 100%;
+    justify-content: center;
+  }
+} 
