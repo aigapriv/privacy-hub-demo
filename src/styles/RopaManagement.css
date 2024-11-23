@@ -1,0 +1,366 @@
+/* Base Styles */
+.ropa-page {
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--color-deep-blue);
+  color: var(--color-text-light);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Header Styles */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-content h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--color-text-light) 0%, var(--color-teal-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-content p {
+  color: var(--color-text-light);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.create-button, .import-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.create-button {
+  background: var(--color-teal-green);
+  color: white;
+}
+
+.import-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+}
+
+.create-button:hover {
+  background: var(--color-teal-light);
+  transform: translateY(-2px);
+}
+
+.import-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Tools Section */
+.tools-section {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.75rem;
+}
+
+.search-icon {
+  color: var(--color-text-light);
+  opacity: 0.5;
+  margin-right: 0.5rem;
+}
+
+.search-bar input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.tool-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--color-text-light);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-toggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 0.25rem;
+}
+
+.toggle-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  color: var(--color-text-light);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+}
+
+.toggle-button.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Table Styles */
+.table-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.ropa-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  table-layout: fixed;
+}
+
+.ropa-table th,
+.ropa-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ropa-table th {
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 500;
+  color: var(--color-text-light);
+}
+
+.th-content {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.sort-icon {
+  font-size: 0.7rem;
+}
+
+.th-content:hover .sort-icon {
+  opacity: 1;
+}
+
+/* Status Badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: -0.2px;
+}
+
+.status-badge.active {
+  background: var(--color-teal-green);
+  color: white;
+}
+
+.status-badge.under-review {
+  background: var(--color-soft-purple);
+  color: white;
+}
+
+.status-badge.inactive {
+  background: #6c757d;
+  color: white;
+}
+
+.status-badge.pending-review {
+  background: #ffc107;
+  color: #000;
+}
+
+.status-badge.archived {
+  background: #495057;
+  color: white;
+}
+
+/* Risk Level */
+.risk-level {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.risk-icon {
+  font-size: 0.9rem;
+}
+
+.risk-icon.low {
+  color: var(--color-teal-green);
+}
+
+.risk-icon.medium {
+  color: #ffc107;
+}
+
+.risk-icon.high {
+  color: #dc3545;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  opacity: 0.7;
+  cursor: pointer;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.action-btn.delete:hover {
+  color: #ff4d4d;
+}
+
+/* Hover effect for table rows */
+.ropa-table tbody tr {
+  transition: all 0.3s ease;
+}
+
+.ropa-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .table-container {
+    margin-top: 1rem;
+  }
+  
+  .ropa-table {
+    font-size: 0.75rem;
+  }
+  
+  .ropa-table th,
+  .ropa-table td {
+    padding: 0.6rem 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .table-container {
+    border-radius: 0;
+  }
+}
+
+/* Add tooltip on hover for truncated text */
+.ropa-table td {
+  position: relative;
+}
+
+.ropa-table td:hover::after {
+  content: attr(data-full-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background: var(--color-deep-blue);
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  z-index: 1;
+  white-space: normal;
+  max-width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 0.8rem;
+  display: none;
+}
+
+.ropa-table td:hover::after {
+  display: block;
+}
+
+/* Update table column widths */
+.ropa-table th[style] {
+  &:nth-child(6) {
+    width: '12%' !important;
+  }
+}
+
+/* Optional: Adjust other column widths to compensate */
+.ropa-table th[style] {
+  &:nth-child(1) { width: '14%' !important; }
+  &:nth-child(2) { width: '11%' !important; }
+  &:nth-child(3) { width: '19%' !important; }
+  &:nth-child(4) { width: '12%' !important; }
+  &:nth-child(5) { width: '10%' !important; }
+  &:nth-child(6) { width: '12%' !important; }
+  &:nth-child(7) { width: '12%' !important; }
+  &:nth-child(8) { width: '10%' !important; }
+}
+</rewritten_file>
