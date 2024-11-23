@@ -172,9 +172,12 @@ const PrivacyNotices = () => {
             <div key={notice.id} className="notice-card">
               <div className="card-header">
                 <div className="header-top">
-                  <span className={`status-badge ${notice.status.toLowerCase()}`}>
-                    {notice.status}
-                  </span>
+                  <div className="status-version">
+                    <span className={`status-badge ${notice.status.toLowerCase()}`}>
+                      {notice.status}
+                    </span>
+                    <span className="version-pill">v{notice.version}</span>
+                  </div>
                   <div className="card-menu">
                     <button className="menu-button">
                       <FaEllipsisV />
@@ -236,35 +239,18 @@ const PrivacyNotices = () => {
                   </div>
                   
                   <div className="metadata-section">
-                    <h4>Integrations</h4>
-                    <div className="integration-status">
-                      <div className={`api-status ${notice.apiEnabled ? 'enabled' : 'disabled'}`}>
-                        <FaCode /> API {notice.apiEnabled ? 'Enabled' : 'Disabled'}
-                      </div>
-                      <div className="connected-systems">
-                        <FaLink /> {notice.connectedSystems.length} Connected Systems
-                      </div>
+                    <h4>API Status</h4>
+                    <div className={`api-status ${notice.apiEnabled ? 'enabled' : 'disabled'}`}>
+                      <FaCode /> {notice.apiEnabled ? 'Enabled' : 'Disabled'}
                     </div>
                   </div>
                 </div>
               </div>
               
               <div className="card-footer">
-                <div className="footer-top">
-                  <div className="version-info">
-                    <span>v{notice.version}</span>
-                    <span>•</span>
-                    <span>{notice.type}</span>
-                  </div>
+                <div className="footer-info">
                   <div className="owner-info">
                     Owner: {notice.owner}
-                  </div>
-                </div>
-                
-                <div className="footer-bottom">
-                  <div className="review-dates">
-                    <span>Last Review: {notice.lastReviewed}</span>
-                    <span>Next Review: {notice.nextReview}</span>
                   </div>
                   <div className="last-updated">
                     Updated: {notice.lastUpdated}

@@ -529,3 +529,81 @@
     align-items: flex-start;
   }
 } 
+
+/* Update these styles in your existing CSS */
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.status-version {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.version-pill {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+/* Updated API Status styles */
+.api-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.api-status.enabled {
+  background: rgba(52, 168, 155, 0.2);
+  color: var(--color-teal-light);
+}
+
+.api-status.disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+/* Simplified footer */
+.card-footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.owner-info, .last-updated {
+  opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .footer-info {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .status-version {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+} 
