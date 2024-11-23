@@ -19,7 +19,7 @@ const LandingPage = () => {
           </h1>
           <p>Elevate your data privacy and compliance</p>
           <div className="button-group">
-            <Link to="/register" className="button primary">
+            <Link to="/components" className="button primary">
               Get Started
             </Link>
             <Link to="/demo" className="button secondary">

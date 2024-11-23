@@ -1,0 +1,220 @@
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.components-page {
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--color-deep-blue);
+  color: var(--color-text-light);
+  position: fixed; /* This prevents scrolling and white space */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto; /* Allow scrolling within the page if needed */
+}
+
+.nav-bar {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-logo a {
+  color: var(--color-text-light);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--color-text-light);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  color: var(--color-teal-green);
+}
+
+.profile-link {
+  padding: 0.5rem 1rem;
+  background: var(--color-teal-green);
+  border-radius: var(--radius-md);
+}
+
+.profile-link:hover {
+  background: var(--color-teal-light) !important;
+  color: var(--color-text-light) !important;
+}
+
+.components-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.components-content h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--color-text-light) 0%, var(--color-teal-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.components-content > p {
+  color: var(--color-text-light);
+  opacity: 0.7;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.component-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card-icon {
+  font-size: 24px;
+  color: var(--color-teal-green);
+}
+
+.component-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-teal-green);
+}
+
+.component-card:hover .icon-wrapper {
+  background: var(--color-teal-green);
+}
+
+.component-card:hover .card-icon {
+  color: white;
+}
+
+.component-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text-light);
+}
+
+.component-card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-light);
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+.card-link {
+  color: var(--color-teal-green);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.card-link:hover {
+  color: var(--color-teal-light);
+}
+
+/* Background gradient */
+.components-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top right, rgba(127, 127, 213, 0.1), transparent 60%),
+              radial-gradient(circle at bottom left, rgba(52, 168, 155, 0.1), transparent 60%);
+  z-index: 0;
+}
+
+/* Ensure content is above gradient */
+.nav-bar, .components-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .component-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .component-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+} 
