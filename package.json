@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "version": "git add -A",
-    "commit": "node commit.js"
+    "commit": "node commit-with-pull.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
