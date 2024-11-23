@@ -1,26 +1,18 @@
-import { BrowserRouter } from 'react-router-dom'
-import { Auth0Provider } from '@auth0/auth0-react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import AppLayout from './components/AppLayout'
-
-const queryClient = new QueryClient()
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import './styles/LandingPage.css';
+import './styles/theme/variables.css';
+import './styles/theme/utilities.css';
 
 function App() {
   return (
-    <Auth0Provider
-      domain={import.meta.env.VITE_AUTH0_DOMAIN}
-      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-      authorizationParams={{
-        redirect_uri: window.location.origin
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <AppLayout />
-        </BrowserRouter>
-      </QueryClientProvider>
-    </Auth0Provider>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

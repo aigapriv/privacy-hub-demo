@@ -1,0 +1,35 @@
+/* Background Colors */
+.bg-deep-blue { background-color: var(--color-deep-blue); }
+.bg-soft-purple { background-color: var(--color-soft-purple); }
+.bg-teal-green { background-color: var(--color-teal-green); }
+
+/* Text Colors */
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-light { color: var(--color-text-light); }
+
+/* Buttons */
+.btn {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-teal-green);
+  color: var(--color-text-light);
+}
+
+.btn-secondary {
+  background-color: var(--color-soft-purple);
+  color: var(--color-text-light);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+} 

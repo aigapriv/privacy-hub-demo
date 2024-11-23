@@ -1,41 +1,20 @@
-import { useState } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuth0 } from '@auth0/auth0-react'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Dashboard from './pages/Dashboard'
-import PrivacyReview from './pages/PrivacyReview'
-import ROPA from './pages/ROPA'
-import Loading from './Loading'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
-function AppLayout() {
-  const [darkMode, setDarkMode] = useState(false)
-  const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0()
-
-  if (isLoading) return <Loading />
-  
-  if (!isAuthenticated) {
-    loginWithRedirect()
-    return <Loading />
-  }
-
+const AppLayout = () => {
   return (
-    <div className={`app-container ${darkMode ? 'dark' : 'light'}`}>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-      <div className="main-content">
+    <div className="app-layout">
+      <Header />
+      <div className="main-container">
         <Sidebar />
-        <div className="page-content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/privacy-review" element={<PrivacyReview />} />
-            <Route path="/ropa" element={<ROPA />} />
-            {/* Add other routes */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
+        <main className="content">
+          <Outlet />
+        </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AppLayout 
+export default AppLayout; 

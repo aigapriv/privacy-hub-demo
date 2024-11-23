@@ -1,0 +1,26 @@
+:root {
+  /* Primary Colors */
+  --deep-blue: #142850;
+  --teal-green: #34A89B;
+  --soft-purple: #7F7FD5;
+  
+  /* Background Colors */
+  --white: #FFFFFF;
+  --navy-blue: #0A1931;
+  --light-gray-blue: #F2F6FA;
+  
+  /* Text Colors */
+  --text-primary: #1B2A41;
+  --text-secondary: #868C96;
+  
+  /* Status Colors */
+  --success: #2DCE89;
+  --warning: #E74C3C;
+  
+  /* Neutral Colors */
+  --border-light: #DCE3F0;
+  --inactive: #A3B4C4;
+  
+  /* Hover States */
+  --teal-hover: #5CC5AE;
+} 
