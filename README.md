@@ -45,3 +45,15 @@ Need help? Check out our documentation or contact support.
 - TanStack Query for data fetching
 
 ## Project Structure
+
+## Testing
+- Unit Tests with Jest
+- Integration Tests with Cypress
+- End-to-End Testing
+- Test Coverage Reports
+
+## Deployment
+- CI/CD with GitHub Actions
+- Docker containerization
+- AWS hosting
+- Automated backups
