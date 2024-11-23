@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import ComponentsPage from './pages/ComponentsPage';
+import PrivacyNotices from './pages/PrivacyNotices';
 import './styles/theme/variables.css';
 import './styles/theme/utilities.css';
 
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/components" element={<ComponentsPage />} />
+        <Route path="/privacy-notices" element={<PrivacyNotices />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
