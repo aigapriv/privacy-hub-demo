@@ -38,3 +38,10 @@ Need help? Check out our documentation or contact support.
 - Vite
 - Node.js
 - Git
+- Express.js
+- MongoDB
+- Auth0 for authentication
+- React Router for navigation
+- TanStack Query for data fetching
+
+## Project Structure
