@@ -1,13 +1,15 @@
 {
   "name": "privacy-hub-new",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "version": "git add -A",
+    "commit": "node commit.js"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",

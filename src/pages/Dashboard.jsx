@@ -3,12 +3,25 @@ import { fetchDashboardStats } from '../api/dashboard'
 import DashboardWidget from '../components/DashboardWidget'
 
 function Dashboard() {
-  const { data: stats, isLoading } = useQuery({
+  const { data: stats, isLoading, error } = useQuery({
     queryKey: ['dashboardStats'],
-    queryFn: fetchDashboardStats
+    queryFn: fetchDashboardStats,
+    retry: 1
   })
 
   if (isLoading) return <div>Loading...</div>
+  
+  if (error) {
+    return (
+      <div className="error-container">
+        <h3>Error loading dashboard</h3>
+        <p>{error.message}</p>
+        <button onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </div>
+    )
+  }
 
   return (
     <main className="dashboard">
