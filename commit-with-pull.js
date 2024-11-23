@@ -9,7 +9,10 @@ const rl = readline.createInterface({
 
 async function gitCommit() {
   try {
-    // Get the git status
+    // Stage all changes first
+    execSync('git add .');
+    
+    // Get the git status after staging
     const status = execSync('git status --porcelain').toString();
     
     if (!status) {
@@ -31,8 +34,10 @@ async function gitCommit() {
       chore: 'Changes to the build process or auxiliary tools'
     };
 
-    // Suggest commit type based on files changed
-    const suggestedType = status.includes('.md') ? 'docs' : 'feat';
+    // Determine the primary type of change
+    const suggestedType = status.includes('.md') ? 'docs' : 
+                         status.includes('.js') ? 'feat' :
+                         status.includes('.css') ? 'style' : 'chore';
 
     console.log('\nCommit types:');
     Object.entries(commitTypes).forEach(([type, desc], index) => {
@@ -56,21 +61,34 @@ async function gitCommit() {
 
       rl.question('Enter commit message: ', async (message) => {
         try {
-          // Create the commit first
-          execSync(`git commit -m "${type}: ${message}"`);
-          console.log('Changes committed successfully!');
+          // Stash any changes
+          execSync('git stash');
 
-          // Then pull and push
-          try {
-            execSync('git pull --rebase origin develop');
-            execSync('git push origin develop');
-            console.log('Successfully pushed changes!');
-          } catch (pushError) {
-            console.error('Error pushing changes:', pushError.message);
-            console.log('You may need to push manually with: git push origin develop');
-          }
+          // Pull latest changes
+          execSync('git pull --rebase origin develop');
+
+          // Pop stashed changes
+          execSync('git stash pop');
+
+          // Stage all changes
+          execSync('git add .');
+
+          // Create commit
+          execSync(`git commit -m "${type}: ${message}"`);
+
+          // Push changes
+          execSync('git push origin develop');
+          
+          console.log('Successfully committed and pushed all changes!');
         } catch (error) {
           console.error('Error:', error.message);
+          console.log('\nTry these steps manually:');
+          console.log('1. git stash');
+          console.log('2. git pull --rebase origin develop');
+          console.log('3. git stash pop');
+          console.log('4. git add .');
+          console.log('5. git commit -m "your message"');
+          console.log('6. git push origin develop');
         }
         rl.close();
       });
