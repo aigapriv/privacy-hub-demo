@@ -32,3 +32,9 @@ A comprehensive privacy management platform built with React.
 
 ## Support
 Need help? Check out our documentation or contact support.
+
+## Technologies Used
+- React 18
+- Vite
+- Node.js
+- Git
