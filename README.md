@@ -18,3 +18,14 @@ A comprehensive privacy management platform built with React.
 - Using React with Vite
 - Automated versioning
 - Conventional commits
+
+## Getting Started
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start development server: `npm run dev`
+
+## Contributing
+1. Create a feature branch
+2. Make your changes
+3. Run tests
+4. Submit a pull request
