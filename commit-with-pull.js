@@ -9,10 +9,6 @@ const rl = readline.createInterface({
 
 async function gitCommit() {
   try {
-    // Pull latest changes with rebase
-    console.log('Pulling latest changes...');
-    execSync('git pull --rebase origin develop');
-
     // Get the git status
     const status = execSync('git status --porcelain').toString();
     
@@ -58,12 +54,21 @@ async function gitCommit() {
         return;
       }
 
-      rl.question('Enter commit message: ', (message) => {
+      rl.question('Enter commit message: ', async (message) => {
         try {
-          execSync('git add .');
+          // Create the commit first
           execSync(`git commit -m "${type}: ${message}"`);
-          execSync('git push origin develop');
-          console.log('Successfully committed and pushed changes!');
+          console.log('Changes committed successfully!');
+
+          // Then pull and push
+          try {
+            execSync('git pull --rebase origin develop');
+            execSync('git push origin develop');
+            console.log('Successfully pushed changes!');
+          } catch (pushError) {
+            console.error('Error pushing changes:', pushError.message);
+            console.log('You may need to push manually with: git push origin develop');
+          }
         } catch (error) {
           console.error('Error:', error.message);
         }
