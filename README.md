@@ -29,3 +29,6 @@ A comprehensive privacy management platform built with React.
 2. Make your changes
 3. Run tests
 4. Submit a pull request
+
+## Support
+Need help? Check out our documentation or contact support.
