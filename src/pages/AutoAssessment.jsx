@@ -38,7 +38,9 @@ const AutoAssessment = () => {
     aiUsage: "Yes",
     cookieUsage: "Yes",
     crossBorderTransfer: "Yes",
-    riskLevel: "High"
+    riskLevel: "High",
+    countryOfOperation: "United Kingdom",
+    dataOwnershipCountry: "United Kingdom"
   };
 
   console.log('Received privacy review data:', privacyReviewData);
@@ -103,11 +105,31 @@ const AutoAssessment = () => {
                   <label>
                     <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5z" />
                     </svg>
                     Project Type
                   </label>
-                  <span>{privacyReviewData.projectType}</span>
+                  <span>{privacyReviewData.projectType || 'Not Specified'}</span>
+                </div>
+                <div className="info-item">
+                  <label>
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                    Country of Operation
+                  </label>
+                  <span>{privacyReviewData.countryOfOperation || 'Not Specified'}</span>
+                </div>
+                <div className="info-item">
+                  <label>
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                    </svg>
+                    Data Ownership Country
+                  </label>
+                  <span>{privacyReviewData.dataOwnershipCountry || 'Not Specified'}</span>
                 </div>
                 <div className="info-item">
                   <label>

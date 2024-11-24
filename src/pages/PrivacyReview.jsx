@@ -927,43 +927,23 @@ const PrivacyReview = () => {
   };
 
   const handleSubmitAssessment = () => {
-    console.log('handleSubmitAssessment called');
+    const assessmentData = {
+      id: Date.now(),
+      projectName: formData.projectName,
+      businessUnit: formData.businessUnit,
+      projectType: formData.projectType,
+      dueDate: formData.dueDate,
+      dataCategories: formData.sensitiveData || [],
+      aiUsage: formData.aiUsage,
+      cookieUsage: formData.cookieUsage,
+      crossBorderTransfer: formData.crossBorderTransfer,
+      country: formData.country,
+      dataOwnershipCountry: formData.dataOwnershipCountry,
+      riskLevel: 'High'
+    };
     
-    // Basic validation
-    if (!formData.projectName || !formData.businessUnit) {
-      console.error('Missing required fields');
-      return;
-    }
-
-    try {
-      const assessmentData = {
-        id: Date.now(),
-        projectName: formData.projectName || '',
-        businessUnit: formData.businessUnit === 'hr' ? 'Human Resources' : 
-                     formData.businessUnit === 'it' ? 'Information Technology' : 
-                     formData.businessUnit.charAt(0).toUpperCase() + formData.businessUnit.slice(1),
-        projectType: formData.projectType || '',
-        dueDate: formData.dueDate || new Date(),
-        dataCategories: formData.sensitiveData || [],
-        aiUsage: formData.aiUsage === 'yes' ? 'Yes' : 'No',
-        cookieUsage: formData.cookieUsage === 'yes' ? 'Yes' : 'No',
-        crossBorderTransfer: formData.crossBorderTransfer === 'yes' ? 'Yes' : 'No',
-        riskLevel: 'High', // We'll calculate this properly later
-      };
-
-      console.log('Assessment data prepared:', assessmentData);
-      
-      // Add to ROPA records
-      addRopaRecord(formData);
-      
-      // Navigate to Auto Assessment
-      navigate('/auto-assessment', { 
-        state: { assessmentData } 
-      });
-      
-    } catch (error) {
-      console.error('Error in handleSubmitAssessment:', error);
-    }
+    console.log('Submitting assessment data:', assessmentData);
+    navigate('/auto-assessment', { state: { assessmentData } });
   };
 
   // Update the render method for the submit button
