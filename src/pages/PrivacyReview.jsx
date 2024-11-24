@@ -149,6 +149,8 @@ const PrivacyReview = () => {
     dueDate: new Date(),
     sensitiveData: [],
     thirdPartySharing: '',
+    crossBorderTransfer: '',
+    aiUsage: '',
     securityMeasures: []
   });
 
@@ -197,6 +199,11 @@ const PrivacyReview = () => {
         if (!formData.country) newErrors.country = 'Country of operation is required';
         if (!formData.dataOwnershipCountry) newErrors.dataOwnershipCountry = 'Country of data ownership is required';
         if (!formData.dueDate) newErrors.dueDate = 'Due date is required';
+        break;
+      case 3:
+        if (!formData.thirdPartySharing) newErrors.thirdPartySharing = 'Please select an option';
+        if (!formData.crossBorderTransfer) newErrors.crossBorderTransfer = 'Please select an option';
+        if (!formData.aiUsage) newErrors.aiUsage = 'Please select an option';
         break;
       // Add validation for other steps as needed
     }
@@ -426,12 +433,12 @@ const PrivacyReview = () => {
       case 3:
         return (
           <div className="step-content">
-            <h2>Data Processing</h2>
+            <h2>Data Usage</h2>
             
             <div className="form-group">
               <label className="required-field">
-                Sensitive Data Processing
-                <Tooltip content="Select all types of sensitive data that will be processed" />
+                Data Processing
+                <Tooltip content="Select all types of data that will be processed" />
               </label>
               <div className="checkbox-group">
                 <label className="checkbox-label">
@@ -450,14 +457,14 @@ const PrivacyReview = () => {
                       }));
                     }}
                   />
-                  Personal Information
+                  Personal Categories of Data
                 </label>
                 <label className="checkbox-label">
                   <input
                     type="checkbox"
                     name="sensitiveData"
-                    value="financial"
-                    checked={formData.sensitiveData.includes('financial')}
+                    value="sensitive"
+                    checked={formData.sensitiveData.includes('sensitive')}
                     onChange={(e) => {
                       const value = e.target.value;
                       setFormData(prev => ({
@@ -468,9 +475,9 @@ const PrivacyReview = () => {
                       }));
                     }}
                   />
-                  Financial Information
+                  Sensitive Categories of Data
                 </label>
-                {/* Add more sensitive data types as needed */}
+                {/* Add more data types as needed */}
               </div>
             </div>
 
@@ -479,16 +486,95 @@ const PrivacyReview = () => {
                 Third Party Data Sharing
                 <Tooltip content="Indicate if data will be shared with third parties" />
               </label>
-              <select
-                name="thirdPartySharing"
-                value={formData.thirdPartySharing}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="">Select Option</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="thirdPartySharing"
+                    value="yes"
+                    checked={formData.thirdPartySharing === 'yes'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  Yes
+                </label>
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="thirdPartySharing"
+                    value="no"
+                    checked={formData.thirdPartySharing === 'no'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  No
+                </label>
+              </div>
+              {errors.thirdPartySharing && <span className="error-message">{errors.thirdPartySharing}</span>}
+            </div>
+
+            <div className="form-group">
+              <label className="required-field">
+                Cross-Border Data Transfer
+                <Tooltip content="Indicate if data will be transferred across country borders" />
+              </label>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="crossBorderTransfer"
+                    value="yes"
+                    checked={formData.crossBorderTransfer === 'yes'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  Yes
+                </label>
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="crossBorderTransfer"
+                    value="no"
+                    checked={formData.crossBorderTransfer === 'no'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  No
+                </label>
+              </div>
+              {errors.crossBorderTransfer && <span className="error-message">{errors.crossBorderTransfer}</span>}
+            </div>
+
+            <div className="form-group">
+              <label className="required-field">
+                AI Usage
+                <Tooltip content="Indicate if this project involves artificial intelligence or machine learning" />
+              </label>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="aiUsage"
+                    value="yes"
+                    checked={formData.aiUsage === 'yes'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  Yes
+                </label>
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="aiUsage"
+                    value="no"
+                    checked={formData.aiUsage === 'no'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  No
+                </label>
+              </div>
+              {errors.aiUsage && <span className="error-message">{errors.aiUsage}</span>}
             </div>
           </div>
         );
@@ -593,7 +679,7 @@ const PrivacyReview = () => {
 
             <div className="summary-section">
               <div className="summary-header">
-                <h3>Data Processing Details</h3>
+                <h3>Data Usage Details</h3>
               </div>
               <div className="summary-content">
                 <div className="summary-item">
@@ -616,19 +702,17 @@ const PrivacyReview = () => {
                     {dataOwnershipCountries.find(c => c.value === formData.dataOwnershipCountry)?.label || formData.dataOwnershipCountry}
                   </span>
                 </div>
-              </div>
-            </div>
-
-            <div className="summary-section">
-              <div className="summary-header">
-                <h3>Third Party Sharing</h3>
-              </div>
-              <div className="summary-content">
                 <div className="summary-item">
                   <span className="summary-label">Third Party Data Sharing:</span>
-                  <span className="summary-value">
-                    {formData.thirdPartySharing === 'yes' ? 'Yes' : 'No'}
-                  </span>
+                  <span className="summary-value">{formData.thirdPartySharing === 'yes' ? 'Yes' : 'No'}</span>
+                </div>
+                <div className="summary-item">
+                  <span className="summary-label">Cross-Border Data Transfer:</span>
+                  <span className="summary-value">{formData.crossBorderTransfer === 'yes' ? 'Yes' : 'No'}</span>
+                </div>
+                <div className="summary-item">
+                  <span className="summary-label">AI Usage:</span>
+                  <span className="summary-value">{formData.aiUsage === 'yes' ? 'Yes' : 'No'}</span>
                 </div>
               </div>
             </div>
@@ -640,13 +724,15 @@ const PrivacyReview = () => {
                 </div>
                 <div className="summary-content">
                   <div className="risk-indicator high">
-                    <span className="risk-label">Sensitive Data Processing</span>
+                    <span className="risk-label">Data Usage</span>
                     <span className="risk-value">High Risk</span>
                   </div>
                   <div className="risk-details">
                     {formData.sensitiveData.map((item, index) => (
                       <span key={index} className="sensitive-data-tag">
-                        {item.charAt(0).toUpperCase() + item.slice(1)} Information
+                        {item === 'personal' ? 'Personal Categories of Data' : 
+                         item === 'sensitive' ? 'Sensitive Categories of Data' : 
+                         item.charAt(0).toUpperCase() + item.slice(1) + ' Information'}
                       </span>
                     ))}
                   </div>
@@ -702,7 +788,7 @@ const PrivacyReview = () => {
                 <div className="step-label">
                   {step === 1 && 'Project Details'}
                   {step === 2 && 'Project Information'}
-                  {step === 3 && 'Data Processing'}
+                  {step === 3 && 'Data Usage'}
                   {step === 4 && 'Security Measures'}
                   {step === 5 && 'Review & Submit'}
                 </div>
