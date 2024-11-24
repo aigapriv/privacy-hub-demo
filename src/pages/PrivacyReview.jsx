@@ -205,11 +205,8 @@ const PrivacyReview = () => {
         if (!formData.thirdPartySharing) newErrors.thirdPartySharing = 'Please select an option';
         if (!formData.crossBorderTransfer) newErrors.crossBorderTransfer = 'Please select an option';
         if (!formData.aiUsage) newErrors.aiUsage = 'Please select an option';
-        break;
-      case 4:
         if (!formData.cookieUsage) newErrors.cookieUsage = 'Please select an option';
         break;
-      // Add validation for other steps as needed
     }
 
     setErrors(newErrors);
@@ -580,59 +577,6 @@ const PrivacyReview = () => {
               </div>
               {errors.aiUsage && <span className="error-message">{errors.aiUsage}</span>}
             </div>
-          </div>
-        );
-
-      case 4:
-        return (
-          <div className="step-content">
-            <h2>Security Measures</h2>
-            
-            <div className="form-group">
-              <label className="required-field">
-                Security Controls
-                <Tooltip content="Select all security measures that will be implemented" />
-              </label>
-              <div className="checkbox-group">
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="securityMeasures"
-                    value="encryption"
-                    checked={formData.securityMeasures.includes('encryption')}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setFormData(prev => ({
-                        ...prev,
-                        securityMeasures: e.target.checked
-                          ? [...prev.securityMeasures, value]
-                          : prev.securityMeasures.filter(item => item !== value)
-                      }));
-                    }}
-                  />
-                  Encryption
-                </label>
-                <label className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="securityMeasures"
-                    value="access-control"
-                    checked={formData.securityMeasures.includes('access-control')}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setFormData(prev => ({
-                        ...prev,
-                        securityMeasures: e.target.checked
-                          ? [...prev.securityMeasures, value]
-                          : prev.securityMeasures.filter(item => item !== value)
-                      }));
-                    }}
-                  />
-                  Access Control
-                </label>
-                {/* Add more security measures as needed */}
-              </div>
-            </div>
 
             <div className="form-group">
               <label className="required-field">
@@ -668,7 +612,7 @@ const PrivacyReview = () => {
           </div>
         );
 
-      case 5:
+      case 4:
         return (
           <div className="step-content summary-step">
             <h2>Review & Submit</h2>
@@ -779,23 +723,6 @@ const PrivacyReview = () => {
                 </div>
               </div>
             )}
-
-            {formData.securityMeasures.length > 0 && (
-              <div className="summary-section">
-                <div className="summary-header">
-                  <h3>Security Measures</h3>
-                </div>
-                <div className="summary-content">
-                  <div className="security-measures-grid">
-                    {formData.securityMeasures.map((measure, index) => (
-                      <span key={index} className="security-measure-tag">
-                        {measure.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         );
 
@@ -819,7 +746,7 @@ const PrivacyReview = () => {
 
         <div className="status-bar">
           <div className="status-steps">
-            {[1, 2, 3, 4, 5].map((step) => (
+            {[1, 2, 3, 4].map((step) => (
               <div 
                 key={step} 
                 className={`status-step ${currentStep >= step ? 'active' : ''} ${currentStep === step ? 'current' : ''}`}
@@ -829,8 +756,7 @@ const PrivacyReview = () => {
                   {step === 1 && 'Project Details'}
                   {step === 2 && 'Project Information'}
                   {step === 3 && 'Data Usage'}
-                  {step === 4 && 'Security Measures'}
-                  {step === 5 && 'Review & Submit'}
+                  {step === 4 && 'Review & Submit'}
                 </div>
               </div>
             ))}
@@ -846,7 +772,7 @@ const PrivacyReview = () => {
                   Previous
                 </button>
               )}
-              {currentStep < 5 && (
+              {currentStep < 4 && (
                 <button className="btn btn-primary" onClick={nextStep}>
                   Next
                 </button>
