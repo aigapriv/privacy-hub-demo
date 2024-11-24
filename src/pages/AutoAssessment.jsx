@@ -7,6 +7,7 @@ const AutoAssessment = () => {
     projectName: "HR Analytics Platform",
     businessUnit: "Human Resources",
     projectType: "New System Implementation",
+    dueDate: "2024-06-30",
     dataCategories: ["Personal Data", "Sensitive Data"],
     aiUsage: "Yes",
     cookieUsage: "Yes",
@@ -39,16 +40,44 @@ const AutoAssessment = () => {
             <div className="card-content">
               <div className="info-grid">
                 <div className="info-item">
-                  <label>Project Name</label>
+                  <label>
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Project Name
+                  </label>
                   <span>{privacyReviewData.projectName}</span>
                 </div>
                 <div className="info-item">
-                  <label>Business Unit</label>
+                  <label>
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    Business Unit
+                  </label>
                   <span>{privacyReviewData.businessUnit}</span>
                 </div>
                 <div className="info-item">
-                  <label>Project Type</label>
+                  <label>
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                    </svg>
+                    Project Type
+                  </label>
                   <span>{privacyReviewData.projectType}</span>
+                </div>
+                <div className="info-item">
+                  <label>
+                    <svg className="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    Due Date
+                  </label>
+                  <span>{new Date(privacyReviewData.dueDate).toLocaleDateString()}</span>
                 </div>
               </div>
             </div>
