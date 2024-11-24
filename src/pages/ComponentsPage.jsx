@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShieldAlt, FaDatabase, FaFileAlt, FaUserShield, 
          FaCheckSquare, FaExclamationTriangle, FaCog, 
          FaRobot, FaHeadset } from 'react-icons/fa';
 import '../styles/ComponentsPage.css';
 
 const ComponentsPage = () => {
+  const navigate = useNavigate();
+
   const components = [
     {
       title: "Privacy Review",
