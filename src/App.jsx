@@ -6,6 +6,7 @@ import PrivacyNotices from './pages/PrivacyNotices';
 import RopaManagement from './pages/RopaManagement';
 import PrivacyReview from './pages/PrivacyReview';
 import AutoAssessment from './pages/AutoAssessment';
+import TestSolidatus from './components/TestSolidatus';
 import './styles/theme/variables.css';
 import './styles/theme/utilities.css';
 import { RopaProvider } from './context/RopaContext';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/ropa-management" element={<RopaManagement />} />
           <Route path="/privacy-review" element={<PrivacyReview />} />
           <Route path="/auto-assessment" element={<AutoAssessment />} />
+          <Route path="/test-solidatus" element={<TestSolidatus />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
