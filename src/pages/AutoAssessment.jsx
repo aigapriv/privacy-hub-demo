@@ -59,12 +59,41 @@ const AutoAssessment = () => {
             <h2>Key Risk Factors</h2>
             <div className="risk-factors">
               {[
-                { label: 'AI Usage', value: privacyReviewData.aiUsage },
-                { label: 'Cookie Usage', value: privacyReviewData.cookieUsage },
-                { label: 'Cross-Border Transfer', value: privacyReviewData.crossBorderTransfer }
+                { 
+                  label: 'AI Usage', 
+                  value: privacyReviewData.aiUsage,
+                  icon: (
+                    <svg className="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 16v-4M12 8h.01"/>
+                    </svg>
+                  )
+                },
+                { 
+                  label: 'Cookie Usage', 
+                  value: privacyReviewData.cookieUsage,
+                  icon: (
+                    <svg className="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+                      <path d="M19 12a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                  )
+                },
+                { 
+                  label: 'Cross-Border Transfer', 
+                  value: privacyReviewData.crossBorderTransfer,
+                  icon: (
+                    <svg className="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                    </svg>
+                  )
+                }
               ].map((factor, index) => (
                 <div key={index} className="risk-factor">
-                  <span className="factor-label">{factor.label}</span>
+                  <div className="factor-info">
+                    {factor.icon}
+                    <span className="factor-label">{factor.label}</span>
+                  </div>
                   <span className={`factor-value ${factor.value.toLowerCase()}`}>
                     {factor.value}
                   </span>

@@ -197,4 +197,100 @@
   font-weight: 500;
   display: inline-block;
 }
+
+.risk-factors-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+}
+
+.risk-factors {
+  display: grid;
+  gap: 1.2rem;
+  padding: 0.5rem;
+}
+
+.risk-factor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.risk-factor:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(4px);
+}
+
+.factor-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.factor-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  color: var(--color-text-light);
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.risk-factor:hover .card-icon {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+.factor-label {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  font-weight: 500;
+}
+
+.factor-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.factor-value.yes {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.15));
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.factor-value.no {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15));
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.risk-factors-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-card-background);
+  border-radius: 12px;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.factor-info {
+  display: flex;
+  align-items: center;
+}
   
