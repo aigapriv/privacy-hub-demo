@@ -158,6 +158,54 @@ const AutoAssessment = () => {
             </div>
           </div>
         </div>
+
+        {/* Next Steps Section */}
+        <div className="next-steps-section">
+          <div className="assessment-card next-steps-card">
+            <h2>Next Steps</h2>
+            <div className="steps-content">
+              <div className="step-item">
+                <div className="step-header">
+                  <svg className="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                  <h3>Complete Data Transfer Impact Assessment</h3>
+                </div>
+                <p className="step-description">
+                  Based on your cross-border transfer activities, a detailed impact assessment is required.
+                </p>
+                <button className="step-button">
+                  Start Assessment
+                  <svg className="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="step-divider"></div>
+
+              <div className="step-item">
+                <div className="step-header">
+                  <svg className="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                  <h3>Proceed to Full Privacy Review Assessment</h3>
+                </div>
+                <p className="step-description">
+                  Complete a comprehensive privacy review to ensure full compliance with privacy requirements.
+                </p>
+                <button className="step-button primary">
+                  Start Privacy Review
+                  <svg className="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

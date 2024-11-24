@@ -346,4 +346,171 @@
   color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
+
+.next-steps-section {
+  margin-top: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.next-steps-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+}
+
+.steps-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.step-item:hover {
+  transform: translateX(4px);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.step-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-light);
+  opacity: 0.8;
+}
+
+.step-header h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.step-description {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin: 0;
+  padding-left: 2.5rem;
+}
+
+.step-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  margin-left: 2.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.step-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.step-button.primary {
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  border: none;
+  color: white;
+}
+
+.step-button.primary:hover {
+  background: linear-gradient(135deg, #4338ca, #2563eb);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.button-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.step-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  margin: 0 1.5rem;
+}
+
+/* Adjust overall spacing */
+.page-container {
+  padding: 1.25rem;
+  height: auto;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Further compress vertical spacing */
+.page-header {
+  margin-bottom: 0.75rem;
+}
+
+.page-header h1 {
+  font-size: 1.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.sub-heading {
+  margin-bottom: 0.75rem;
+}
+
+/* Tighten grid and card spacing */
+.assessment-grid {
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.assessment-card {
+  padding: 1rem;
+}
+
+/* Compress recommendations and next steps */
+.recommendations-section,
+.next-steps-section {
+  margin-top: 0.75rem;
+}
+
+.steps-content {
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.step-item {
+  padding: 0.75rem;
+}
+
+/* Adjust info items */
+.info-grid {
+  gap: 0.75rem;
+}
+
+.info-item {
+  gap: 0.2rem;
+}
   
