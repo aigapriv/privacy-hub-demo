@@ -151,6 +151,7 @@ const PrivacyReview = () => {
     thirdPartySharing: '',
     crossBorderTransfer: '',
     aiUsage: '',
+    cookieUsage: '',
     securityMeasures: []
   });
 
@@ -204,6 +205,9 @@ const PrivacyReview = () => {
         if (!formData.thirdPartySharing) newErrors.thirdPartySharing = 'Please select an option';
         if (!formData.crossBorderTransfer) newErrors.crossBorderTransfer = 'Please select an option';
         if (!formData.aiUsage) newErrors.aiUsage = 'Please select an option';
+        break;
+      case 4:
+        if (!formData.cookieUsage) newErrors.cookieUsage = 'Please select an option';
         break;
       // Add validation for other steps as needed
     }
@@ -629,6 +633,38 @@ const PrivacyReview = () => {
                 {/* Add more security measures as needed */}
               </div>
             </div>
+
+            <div className="form-group">
+              <label className="required-field">
+                Cookie Usage
+                <Tooltip content="Indicate if this project will use cookies" />
+              </label>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="cookieUsage"
+                    value="yes"
+                    checked={formData.cookieUsage === 'yes'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  Yes
+                </label>
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="cookieUsage"
+                    value="no"
+                    checked={formData.cookieUsage === 'no'}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  No
+                </label>
+              </div>
+              {errors.cookieUsage && <span className="error-message">{errors.cookieUsage}</span>}
+            </div>
           </div>
         );
 
@@ -713,6 +749,10 @@ const PrivacyReview = () => {
                 <div className="summary-item">
                   <span className="summary-label">AI Usage:</span>
                   <span className="summary-value">{formData.aiUsage === 'yes' ? 'Yes' : 'No'}</span>
+                </div>
+                <div className="summary-item">
+                  <span className="summary-label">Cookie Usage:</span>
+                  <span className="summary-value">{formData.cookieUsage === 'yes' ? 'Yes' : 'No'}</span>
                 </div>
               </div>
             </div>
