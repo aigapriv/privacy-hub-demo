@@ -11,10 +11,12 @@ import '../styles/RopaManagement.css';
 import { useRopa } from '../context/RopaContext';
 
 const RopaManagement = () => {
-  const { ropaRecords } = useRopa();
+  const { ropaRecords, addRopaRecord } = useRopa();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [editingRecord, setEditingRecord] = useState(null);
+
+  console.log('ROPA Records:', ropaRecords);
 
   const getRiskIcon = (riskLevel) => {
     switch(riskLevel.toLowerCase()) {
@@ -150,6 +152,27 @@ const RopaManagement = () => {
     });
   };
 
+  // Add this test function
+  const addTestRecord = () => {
+    const testRecord = {
+      id: Date.now(),
+      title: "Test Project",
+      department: "Test Department",
+      processingPurpose: "Test Purpose",
+      legalBasis: "Legitimate Interest",
+      dataCategories: ["Test Category"],
+      riskLevel: "High",
+      status: "Draft",
+      lastUpdated: new Date().toISOString().split('T')[0]
+    };
+    
+    console.log('Adding test record:', testRecord);
+    addRopaRecord(testRecord);
+  };
+
+  // Add this debug log before the table render
+  console.log('Rendering table with records:', ropaRecords);
+
   return (
     <div className="ropa-page">
       <nav className="nav-bar">
@@ -170,6 +193,20 @@ const RopaManagement = () => {
             <p>Manage your Records of Processing Activities</p>
           </div>
           <div className="header-actions">
+            <button 
+              onClick={addTestRecord}
+              style={{
+                marginRight: '10px',
+                padding: '8px 16px',
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Add Test Record
+            </button>
             <button className="import-button">
               <FaDownload /> Import
             </button>
@@ -195,115 +232,78 @@ const RopaManagement = () => {
         </div>
 
         <div className="table-container" style={{ width: '100%', margin: '0 auto' }}>
-          <table className="ropa-table">
-            <thead>
-              <tr>
-                <th style={{ width: '16%' }}>
-                  <div className="th-content">
-                    Title <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '11%' }}>
-                  <div className="th-content">
-                    Department <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '14%' }}>
-                  <div className="th-content">
-                    Purpose <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '11%' }}>
-                  <div className="th-content">
-                    Legal Basis <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '15%' }}>
-                  <div className="th-content">
-                    Data Categories <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '10%' }}>
-                  <div className="th-content">
-                    Risk Level <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '8%' }}>
-                  <div className="th-content">
-                    Status <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '8%' }}>
-                  <div className="th-content">
-                    Last Updated <FaSort className="sort-icon" />
-                  </div>
-                </th>
-                <th style={{ width: '7%' }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ropaRecords.map((record) => (
-                <tr key={record.id}>
-                  <td>{record.title}</td>
-                  <td>{record.department}</td>
-                  <td>{record.processingPurpose}</td>
-                  <td>{record.legalBasis}</td>
-                  <td style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}>
-                    {record.dataCategories?.map((category, index) => (
-                      <span key={index}>
-                        {category}
-                        {index < record.dataCategories.length - 1 ? ', ' : ''}
-                      </span>
-                    ))}
-                  </td>
-                  <td>
-                    <div className="risk-level" style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      {getRiskIcon(record.riskLevel)}
-                      <span>{record.riskLevel}</span>
+          <div className="ropa-table">
+            <table>
+              <thead>
+                <tr>
+                  <th style={{ width: '15%' }}>
+                    <div className="th-content">
+                      Title <FaSort className="sort-icon" />
                     </div>
-                  </td>
-                  <td>
-                    <span className={`status-badge ${record.status.toLowerCase().replace(' ', '-')}`} 
-                      style={{ 
-                        fontSize: '0.75rem',
-                        padding: '4px 8px',
-                        whiteSpace: 'nowrap',
-                        display: 'inline-block',
-                        width: 'fit-content',
-                        minWidth: 'auto'
-                      }}>
-                      {record.status}
-                    </span>
-                  </td>
-                  <td>{record.lastUpdated}</td>
-                  <td>
-                    <div className="action-buttons">
-                      <button 
-                        className="action-btn" 
-                        title="View"
-                        onClick={() => handleViewRecord(record)}
-                      >
-                        <FaEye />
-                      </button>
-                      <button 
-                        className="action-btn" 
-                        title="Edit"
-                        onClick={() => handleEditRecord(record)}
-                      >
-                        <FaEdit />
-                      </button>
-                      <button className="action-btn" title="Duplicate">
-                        <FaCopy />
-                      </button>
-                      <button className="action-btn delete" title="Delete">
-                        <FaTrash />
-                      </button>
-                    </div>
-                  </td>
+                  </th>
+                  <th style={{ width: '12%' }}>Department</th>
+                  <th style={{ width: '15%' }}>Processing Purpose</th>
+                  <th style={{ width: '10%' }}>Legal Basis</th>
+                  <th style={{ width: '15%' }}>Data Categories</th>
+                  <th style={{ width: '10%' }}>Risk Level</th>
+                  <th style={{ width: '8%' }}>Status</th>
+                  <th style={{ width: '8%' }}>Last Updated</th>
+                  <th style={{ width: '7%' }}>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {ropaRecords && ropaRecords.length > 0 ? (
+                  ropaRecords.map((record) => (
+                    <tr key={record.id}>
+                      <td>{record.title || 'N/A'}</td>
+                      <td>{record.department || 'N/A'}</td>
+                      <td>{record.processingPurpose || 'N/A'}</td>
+                      <td>{record.legalBasis || 'N/A'}</td>
+                      <td>
+                        {record.dataCategories?.length > 0 
+                          ? record.dataCategories.join(', ') 
+                          : 'N/A'}
+                      </td>
+                      <td>
+                        <div className="risk-level">
+                          {getRiskIcon(record.riskLevel)}
+                          <span>{record.riskLevel || 'N/A'}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span className={`status-badge ${(record.status || '').toLowerCase()}`}>
+                          {record.status || 'N/A'}
+                        </span>
+                      </td>
+                      <td>{record.lastUpdated || 'N/A'}</td>
+                      <td>
+                        <div className="action-buttons">
+                          <button className="action-btn" onClick={() => handleViewRecord(record)}>
+                            <FaEye />
+                          </button>
+                          <button className="action-btn" onClick={() => handleEditRecord(record)}>
+                            <FaEdit />
+                          </button>
+                          <button className="action-btn">
+                            <FaCopy />
+                          </button>
+                          <button className="action-btn delete">
+                            <FaTrash />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="9" style={{ textAlign: 'center', padding: '20px' }}>
+                      No records found
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/components" element={<ComponentsPage />} />
           <Route path="/privacy-notices" element={<PrivacyNotices />} />
-          <Route path="/ropa" element={<RopaManagement />} />
+          <Route path="/ropa-management" element={<RopaManagement />} />
           <Route path="/privacy-review" element={<PrivacyReview />} />
           <Route path="/auto-assessment" element={<AutoAssessment />} />
           <Route path="*" element={<Navigate to="/" />} />

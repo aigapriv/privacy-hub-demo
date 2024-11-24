@@ -161,6 +161,26 @@ const PrivacyReview = () => {
 
   const [errors, setErrors] = useState({});
 
+  console.log('Privacy Review rendering, addRopaRecord:', !!addRopaRecord);
+
+  const testSubmit = () => {
+    console.log('Test submit clicked');
+    const testRecord = {
+      id: Date.now(),
+      title: "Test Project",
+      department: "Test Department",
+      processingPurpose: "Test Purpose",
+      legalBasis: "Legitimate Interest",
+      dataCategories: ["Test Category"],
+      riskLevel: "High",
+      status: "Draft",
+      lastUpdated: new Date().toISOString().split('T')[0]
+    };
+    
+    console.log('Adding test record:', testRecord);
+    addRopaRecord(testRecord);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -927,23 +947,53 @@ const PrivacyReview = () => {
   };
 
   const handleSubmitAssessment = () => {
-    const assessmentData = {
-      id: Date.now(),
-      projectName: formData.projectName,
-      businessUnit: formData.businessUnit,
-      projectType: formData.projectType,
-      dueDate: formData.dueDate,
-      dataCategories: formData.sensitiveData || [],
-      aiUsage: formData.aiUsage,
-      cookieUsage: formData.cookieUsage,
-      crossBorderTransfer: formData.crossBorderTransfer,
-      country: formData.country,
-      dataOwnershipCountry: formData.dataOwnershipCountry,
-      riskLevel: 'High'
-    };
+    console.log('handleSubmitAssessment called');
+    console.log('Current formData:', formData);
+    console.log('addRopaRecord function available:', !!addRopaRecord);
     
-    console.log('Submitting assessment data:', assessmentData);
-    navigate('/auto-assessment', { state: { assessmentData } });
+    // Create ROPA record
+    const ropaRecord = {
+      id: Date.now(),
+      title: formData.projectName || 'Untitled Project',
+      department: formData.businessUnit === 'hr' ? 'Human Resources' : 
+                 formData.businessUnit === 'it' ? 'Information Technology' : 
+                 formData.businessUnit.charAt(0).toUpperCase() + formData.businessUnit.slice(1),
+      processingPurpose: formData.businessProcess || 'Not Specified',
+      legalBasis: formData.crossBorderTransfer === 'yes' ? 'Legal Obligation' : 'Legitimate Interest',
+      dataCategories: formData.sensitiveData || [],
+      riskLevel: formData.aiUsage === 'yes' || formData.crossBorderTransfer === 'yes' ? 'High' : 'Medium',
+      status: 'Draft',
+      lastUpdated: new Date().toISOString().split('T')[0]
+    };
+
+    console.log('About to create ROPA record:', ropaRecord);
+    
+    try {
+      addRopaRecord(ropaRecord);
+      console.log('ROPA record added successfully');
+      
+      // Create assessment data
+      const assessmentData = {
+        id: ropaRecord.id,
+        projectName: formData.projectName,
+        businessUnit: formData.businessUnit,
+        projectType: formData.projectType,
+        dueDate: formData.dueDate,
+        dataCategories: formData.sensitiveData || [],
+        aiUsage: formData.aiUsage === 'yes' ? 'Yes' : 'No',
+        cookieUsage: formData.cookieUsage === 'yes' ? 'Yes' : 'No',
+        crossBorderTransfer: formData.crossBorderTransfer === 'yes' ? 'Yes' : 'No',
+        country: formData.country,
+        dataOwnershipCountry: formData.dataOwnershipCountry,
+        riskLevel: ropaRecord.riskLevel
+      };
+
+      console.log('Navigating to auto-assessment with data:', assessmentData);
+      navigate('/auto-assessment', { state: { assessmentData } });
+      
+    } catch (error) {
+      console.error('Error in handleSubmitAssessment:', error);
+    }
   };
 
   // Update the render method for the submit button
@@ -992,14 +1042,9 @@ const PrivacyReview = () => {
                 <button 
                   type="button"
                   className="btn btn-primary"
-                  onClick={handleSubmitAssessment}
-                  style={{ 
-                    cursor: 'pointer',
-                    backgroundColor: '#007bff',
-                    color: 'white',
-                    padding: '10px 20px',
-                    border: 'none',
-                    borderRadius: '4px'
+                  onClick={() => {
+                    console.log('Submit button clicked');
+                    handleSubmitAssessment();
                   }}
                 >
                   Submit for Auto-Assessment

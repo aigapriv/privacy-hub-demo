@@ -4,7 +4,7 @@ import { useRopa } from '../context/RopaContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const AutoAssessment = () => {
-  const { updateRopaFromAssessment } = useRopa();
+  const { updateRopaFromAssessment, addRopaRecord } = useRopa();
   const location = useLocation();
   const navigate = useNavigate();
   
@@ -55,6 +55,33 @@ const AutoAssessment = () => {
     };
     updateRopaFromAssessment(assessmentData, privacyReviewData.id);
     navigate('/ropa-management');
+  };
+
+  // Add this function to create ROPA record
+  const createRopaRecord = () => {
+    const data = location.state?.assessmentData;
+    if (!data) {
+      console.log('No assessment data available');
+      return;
+    }
+
+    const ropaRecord = {
+      id: Date.now(),
+      title: data.projectName || 'Untitled Project',
+      department: data.businessUnit === 'hr' ? 'Human Resources' : 
+                 data.businessUnit === 'it' ? 'Information Technology' : 
+                 data.businessUnit.charAt(0).toUpperCase() + data.businessUnit.slice(1),
+      processingPurpose: 'Project Assessment',
+      legalBasis: data.crossBorderTransfer === 'Yes' ? 'Legal Obligation' : 'Legitimate Interest',
+      dataCategories: data.dataCategories || [],
+      riskLevel: data.riskLevel || 'High',
+      status: 'Draft',
+      lastUpdated: new Date().toISOString().split('T')[0]
+    };
+
+    console.log('Creating ROPA record:', ropaRecord);
+    addRopaRecord(ropaRecord);
+    alert('ROPA record created successfully!');
   };
 
   return (
@@ -219,6 +246,35 @@ const AutoAssessment = () => {
               </div>
             </div>
           </div>
+          
+          {/* Add this button */}
+          <button 
+            onClick={createRopaRecord}
+            style={{
+              marginTop: '20px',
+              padding: '10px 20px',
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            <svg 
+              width="20" 
+              height="20" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2"
+            >
+              <path d="M12 5v14M5 12h14"/>
+            </svg>
+            Create ROPA Record
+          </button>
         </div>
 
         {/* Next Steps Section */}

@@ -25,7 +25,7 @@ const ComponentsPage = () => {
       title: "ROPA Management",
       description: "Maintain and update your Records of Processing Activities in compliance with GDPR Article 30.",
       icon: <FaDatabase className="card-icon" />,
-      path: "/ropa"
+      path: "/ropa-management"
     },
     {
       title: "Privacy Notices",
@@ -74,7 +74,7 @@ const ComponentsPage = () => {
         <div className="nav-links">
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/privacy-review">Privacy Review</Link>
-          <Link to="/ropa">ROPA</Link>
+          <Link to="/ropa-management">ROPA</Link>
           <Link to="/profile" className="profile-link">Profile</Link>
         </div>
       </nav>
