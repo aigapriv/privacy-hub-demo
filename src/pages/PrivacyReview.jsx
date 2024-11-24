@@ -844,6 +844,10 @@ const PrivacyReview = () => {
     }
   };
 
+  const handleSubmitAssessment = () => {
+    console.log('Submitting for auto-assessment:', formData);
+  };
+
   return (
     <div className="page-container">
       <div className="content-wrapper">
@@ -885,10 +889,19 @@ const PrivacyReview = () => {
                   Previous
                 </button>
               )}
-              {currentStep < 4 && (
-                <button className="btn btn-primary" onClick={nextStep}>
-                  Next
+              {currentStep === 4 ? (
+                <button 
+                  className="btn btn-primary submit-btn"
+                  onClick={handleSubmitAssessment}
+                >
+                  Submit for Auto-Assessment
                 </button>
+              ) : (
+                currentStep < 4 && (
+                  <button className="btn btn-primary" onClick={nextStep}>
+                    Next
+                  </button>
+                )
               )}
             </div>
           </div>

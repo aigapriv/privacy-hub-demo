@@ -278,9 +278,10 @@ textarea {
 /* Button Styles */
 .button-group {
   display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+  justify-content: space-between;
   margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
 }
 
 .btn {
@@ -641,4 +642,19 @@ select option:not([value=""]) {
 
 .summary-value {
   font-weight: 500;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #4338ca, #2563eb);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
 }
