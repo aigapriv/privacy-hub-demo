@@ -44,35 +44,90 @@ const subUnitOptions = {
 };
 
 const businessProcessOptions = {
-  // Finance processes
+  // Finance - Accounting processes
   accounting: [
     { value: 'financial-reporting', label: 'Financial Reporting' },
     { value: 'accounts-payable', label: 'Accounts Payable' },
     { value: 'accounts-receivable', label: 'Accounts Receivable' },
     { value: 'general-ledger', label: 'General Ledger' }
   ],
+  // Finance - Treasury processes
   treasury: [
     { value: 'cash-management', label: 'Cash Management' },
     { value: 'investments', label: 'Investments' },
-    { value: 'forex', label: 'Foreign Exchange' },
+    { value: 'risk-management', label: 'Risk Management' },
     { value: 'funding', label: 'Funding & Capital' }
   ],
-  // ... other finance processes
-
-  // HR processes
+  // HR - Recruitment processes
   recruitment: [
     { value: 'talent-acquisition', label: 'Talent Acquisition' },
     { value: 'screening', label: 'Candidate Screening' },
-    { value: 'interviewing', label: 'Interviewing' },
-    { value: 'onboarding', label: 'Onboarding' }
+    { value: 'onboarding', label: 'Employee Onboarding' },
+    { value: 'offboarding', label: 'Employee Offboarding' }
   ],
+  // HR - Compensation processes
   compensation: [
-    { value: 'payroll', label: 'Payroll' },
+    { value: 'payroll', label: 'Payroll Processing' },
     { value: 'benefits', label: 'Benefits Administration' },
-    { value: 'salary-review', label: 'Salary Review' },
-    { value: 'performance-mgmt', label: 'Performance Management' }
+    { value: 'performance', label: 'Performance Management' },
+    { value: 'rewards', label: 'Rewards & Recognition' }
   ],
-  // ... continue with all other processes
+  // IT - Infrastructure processes
+  infrastructure: [
+    { value: 'network', label: 'Network Management' },
+    { value: 'servers', label: 'Server Administration' },
+    { value: 'cloud', label: 'Cloud Services' },
+    { value: 'storage', label: 'Data Storage' }
+  ],
+  // IT - Development processes
+  development: [
+    { value: 'application-dev', label: 'Application Development' },
+    { value: 'testing', label: 'Testing & QA' },
+    { value: 'deployment', label: 'Deployment' },
+    { value: 'maintenance', label: 'Maintenance' }
+  ],
+  // Marketing - Digital processes
+  digital: [
+    { value: 'social-media', label: 'Social Media Management' },
+    { value: 'email-marketing', label: 'Email Marketing' },
+    { value: 'content-mgmt', label: 'Content Management' },
+    { value: 'analytics', label: 'Digital Analytics' }
+  ],
+  // Marketing - Brand processes
+  brand: [
+    { value: 'brand-strategy', label: 'Brand Strategy' },
+    { value: 'creative', label: 'Creative Development' },
+    { value: 'campaigns', label: 'Campaign Management' },
+    { value: 'market-research', label: 'Market Research' }
+  ],
+  // Operations - Manufacturing processes
+  manufacturing: [
+    { value: 'production', label: 'Production Planning' },
+    { value: 'quality-control', label: 'Quality Control' },
+    { value: 'inventory', label: 'Inventory Management' },
+    { value: 'maintenance', label: 'Equipment Maintenance' }
+  ],
+  // Operations - Quality processes
+  quality: [
+    { value: 'quality-assurance', label: 'Quality Assurance' },
+    { value: 'compliance', label: 'Compliance Management' },
+    { value: 'auditing', label: 'Quality Auditing' },
+    { value: 'improvement', label: 'Process Improvement' }
+  ],
+  // Sales - Direct Sales processes
+  'direct-sales': [
+    { value: 'lead-management', label: 'Lead Management' },
+    { value: 'opportunity-mgmt', label: 'Opportunity Management' },
+    { value: 'account-mgmt', label: 'Account Management' },
+    { value: 'sales-forecasting', label: 'Sales Forecasting' }
+  ],
+  // Sales - Customer Service processes
+  'customer-service': [
+    { value: 'support', label: 'Customer Support' },
+    { value: 'complaints', label: 'Complaint Management' },
+    { value: 'feedback', label: 'Feedback Management' },
+    { value: 'satisfaction', label: 'Customer Satisfaction' }
+  ]
 };
 
 const PrivacyReview = () => {
@@ -236,7 +291,7 @@ const PrivacyReview = () => {
             <div className="form-group">
               <label className="required-field">
                 Business Process
-                <Tooltip content="Choose the main business process this project relates to" />
+                <Tooltip content="Select the specific business process this project relates to" />
               </label>
               <select
                 name="businessProcess"
@@ -247,13 +302,11 @@ const PrivacyReview = () => {
                 disabled={!formData.subUnit}
               >
                 <option value="">Select Business Process</option>
-                {formData.subUnit && 
-                  businessProcessOptions[formData.subUnit]?.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))
-                }
+                {formData.subUnit && businessProcessOptions[formData.subUnit]?.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
               {errors.businessProcess && <span className="error-message">{errors.businessProcess}</span>}
             </div>
