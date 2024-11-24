@@ -16,6 +16,12 @@ const ComponentsPage = () => {
       path: "/privacy-review"
     },
     {
+      title: "Auto-Assessment",
+      description: "Automated privacy impact assessments for your projects and processes.",
+      icon: <FaRobot className="card-icon" />,
+      path: "/auto-assessment"
+    },
+    {
       title: "ROPA Management",
       description: "Maintain and update your Records of Processing Activities in compliance with GDPR Article 30.",
       icon: <FaDatabase className="card-icon" />,
@@ -26,6 +32,12 @@ const ComponentsPage = () => {
       description: "Create and manage transparent privacy notices that build trust with stakeholders.",
       icon: <FaFileAlt className="card-icon" />,
       path: "/privacy-notices"
+    },
+    {
+      title: "Privacy by Design",
+      description: "Implement privacy controls early in your development lifecycle.",
+      icon: <FaCog className="card-icon" />,
+      path: "/privacy-by-design"
     },
     {
       title: "Data Subject Rights",
@@ -44,18 +56,6 @@ const ComponentsPage = () => {
       description: "Identify, assess, and mitigate privacy risks across your organization.",
       icon: <FaExclamationTriangle className="card-icon" />,
       path: "/risk"
-    },
-    {
-      title: "Privacy by Design",
-      description: "Implement privacy controls early in your development lifecycle.",
-      icon: <FaCog className="card-icon" />,
-      path: "/privacy-by-design"
-    },
-    {
-      title: "Auto-Assessment",
-      description: "Automated privacy impact assessments for your projects and processes.",
-      icon: <FaRobot className="card-icon" />,
-      path: "/auto-assessment"
     },
     {
       title: "Privacy Support",
