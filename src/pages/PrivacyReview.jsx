@@ -578,20 +578,52 @@ const PrivacyReview = () => {
 
   return (
     <div className="page-container">
-      <div className="page-content">
-        <div className="main-content">
-          {renderStep()}
-          <div className="button-group">
-            {currentStep > 1 && (
-              <button className="btn btn-secondary" onClick={prevStep}>
-                Previous
-              </button>
-            )}
-            {currentStep < 5 && (
-              <button className="btn btn-primary" onClick={nextStep}>
-                Next
-              </button>
-            )}
+      <div className="content-wrapper">
+        <div className="page-header">
+          <h1>Privacy Review</h1>
+          <div className="sub-heading">
+            <p>Pre-Screening Assessment</p>
+            <span className="definition">
+              This privacy review helps identify potential privacy risks and compliance requirements for your project.
+            </span>
+          </div>
+        </div>
+
+        <div className="status-bar">
+          <div className="status-steps">
+            {[1, 2, 3, 4, 5].map((step) => (
+              <div 
+                key={step} 
+                className={`status-step ${currentStep >= step ? 'active' : ''} ${currentStep === step ? 'current' : ''}`}
+              >
+                <div className="step-circle">{step}</div>
+                <div className="step-label">
+                  {step === 1 && 'Project Details'}
+                  {step === 2 && 'Project Information'}
+                  {step === 3 && 'Data Processing'}
+                  {step === 4 && 'Security Measures'}
+                  {step === 5 && 'Review & Submit'}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="page-content">
+          <div className="main-content">
+            {renderStep()}
+            <div className="button-group">
+              {currentStep > 1 && (
+                <button className="btn btn-secondary" onClick={prevStep}>
+                  Previous
+                </button>
+              )}
+              {currentStep < 5 && (
+                <button className="btn btn-primary" onClick={nextStep}>
+                  Next
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
