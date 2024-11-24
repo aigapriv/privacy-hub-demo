@@ -232,6 +232,21 @@ const PrivacyReview = () => {
     </span>
   );
 
+  const formatSubUnitLabel = (subUnit) => {
+    if (!subUnit) return '';
+    
+    // Find the label from subUnitOptions
+    const businessUnit = formData.businessUnit;
+    const subUnitOption = subUnitOptions[businessUnit]?.find(
+      option => option.value === subUnit
+    );
+    
+    return subUnitOption ? subUnitOption.label : subUnit
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   const renderStep = () => {
     switch(currentStep) {
       case 1:
@@ -636,9 +651,7 @@ const PrivacyReview = () => {
                 </div>
                 <div className="summary-item">
                   <span className="summary-label">Sub Unit:</span>
-                  <span className="summary-value">
-                    {formData.subUnit}
-                  </span>
+                  <span className="summary-value">{formatSubUnitLabel(formData.subUnit)}</span>
                 </div>
                 <div className="summary-item">
                   <span className="summary-label">Project Due Date:</span>
