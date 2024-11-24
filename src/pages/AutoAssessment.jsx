@@ -1,16 +1,39 @@
 import React from 'react';
 import '../styles/AutoAssessment.css';
 import { useRopa } from '../context/RopaContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AutoAssessment = () => {
   const { updateRopaFromAssessment } = useRopa();
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Debug log
+  console.log('Auto Assessment received state:', location.state);
 
-  // Mock data from Privacy Review (replace with actual data later)
-  const privacyReviewData = {
+  // Helper function to generate recommendations based on privacy review data
+  const generateRecommendations = (data) => {
+    const recommendations = [];
+    
+    if (data.aiUsage === 'Yes') {
+      recommendations.push("Implement enhanced data protection measures for AI processing activities");
+    }
+    if (data.crossBorderTransfer === 'Yes') {
+      recommendations.push("Review and update cross-border data transfer agreements");
+    }
+    if (data.cookieUsage === 'Yes') {
+      recommendations.push("Document cookie usage in privacy notices");
+    }
+    
+    return recommendations;
+  };
+  
+  // Use passed data or fallback to default
+  const privacyReviewData = location.state?.assessmentData || {
     projectName: "HR Analytics Platform",
     businessUnit: "Human Resources",
     projectType: "New System Implementation",
-    dueDate: "2024-06-30",
+    dueDate: new Date(),
     dataCategories: ["Personal Data", "Sensitive Data"],
     aiUsage: "Yes",
     cookieUsage: "Yes",
@@ -18,16 +41,18 @@ const AutoAssessment = () => {
     riskLevel: "High"
   };
 
+  console.log('Received privacy review data:', privacyReviewData);
+
+  // Generate recommendations based on the actual data
+  const recommendations = generateRecommendations(privacyReviewData);
+
   const handleStartPrivacyReview = () => {
     const assessmentData = {
       riskLevel: privacyReviewData.riskLevel,
-      recommendedMeasures: [
-        "Implement enhanced data protection",
-        "Review cross-border transfers",
-        "Update privacy notices"
-      ]
+      recommendedMeasures: recommendations
     };
     updateRopaFromAssessment(assessmentData, privacyReviewData.id);
+    navigate('/ropa-management');
   };
 
   return (

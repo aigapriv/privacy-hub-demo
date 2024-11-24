@@ -4,6 +4,7 @@ import { FaInfoCircle } from 'react-icons/fa';
 import "react-datepicker/dist/react-datepicker.css";
 import '../styles/PrivacyReview.css';
 import { useRopa } from '../context/RopaContext';
+import { useNavigate } from 'react-router-dom';
 
 const subUnitOptions = {
   finance: [
@@ -137,6 +138,7 @@ const dataOwnershipCountries = [
 ];
 
 const PrivacyReview = () => {
+  const navigate = useNavigate();
   const { addRopaRecord } = useRopa();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -302,6 +304,42 @@ const PrivacyReview = () => {
     }
   };
 
+  const generateProjectName = (businessUnit, subUnit, businessProcess) => {
+    if (!businessUnit || !subUnit || !businessProcess) {
+      return "Please select Business Unit, Sub Unit, and Business Process first";
+    }
+
+    const processName = businessProcessOptions[subUnit]?.find(
+      bp => bp.value === businessProcess
+    )?.label || businessProcess;
+
+    const unitName = businessUnit === 'hr' ? 'HR' : 
+                    businessUnit === 'it' ? 'IT' : 
+                    businessUnit.charAt(0).toUpperCase() + businessUnit.slice(1);
+
+    return `${unitName} ${processName} Initiative ${new Date().getFullYear()}`;
+  };
+
+  const generateProjectDescription = (businessUnit, subUnit, businessProcess) => {
+    if (!businessUnit || !subUnit || !businessProcess) {
+      return "Please select Business Unit, Sub Unit, and Business Process first";
+    }
+
+    const processName = businessProcessOptions[subUnit]?.find(
+      bp => bp.value === businessProcess
+    )?.label || businessProcess;
+
+    const unitName = businessUnit === 'hr' ? 'Human Resources' : 
+                    businessUnit === 'it' ? 'Information Technology' : 
+                    businessUnit.charAt(0).toUpperCase() + businessUnit.slice(1);
+
+    const subUnitName = subUnitOptions[businessUnit]?.find(
+      su => su.value === subUnit
+    )?.label || subUnit;
+
+    return `This project aims to implement a ${processName.toLowerCase()} solution for the ${subUnitName} team within ${unitName}. The initiative will enhance operational efficiency, ensure compliance with relevant regulations, and improve data management practices.`;
+  };
+
   const renderStep = () => {
     switch(currentStep) {
       case 1:
@@ -314,14 +352,35 @@ const PrivacyReview = () => {
                 Project Name
                 <Tooltip content="Enter the official name of your project or initiative" />
               </label>
-              <input
-                type="text"
-                name="projectName"
-                value={formData.projectName}
-                onChange={handleInputChange}
-                placeholder="Enter project name"
-                required
-              />
+              <div className="input-with-button">
+                <input
+                  type="text"
+                  name="projectName"
+                  value={formData.projectName}
+                  onChange={handleInputChange}
+                  className={errors.projectName ? 'error' : ''}
+                />
+                <button 
+                  type="button" 
+                  className="generate-btn"
+                  onClick={() => {
+                    const generatedName = generateProjectName(
+                      formData.businessUnit,
+                      formData.subUnit,
+                      formData.businessProcess
+                    );
+                    setFormData(prev => ({
+                      ...prev,
+                      projectName: generatedName
+                    }));
+                  }}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="generate-icon">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Auto-generate
+                </button>
+              </div>
               {errors.projectName && <span className="error-message">{errors.projectName}</span>}
             </div>
 
@@ -401,13 +460,34 @@ const PrivacyReview = () => {
                 Project Description
                 <Tooltip content="Provide a detailed description of your project's purpose and scope" />
               </label>
-              <textarea
-                name="projectDescription"
-                value={formData.projectDescription}
-                onChange={handleInputChange}
-                placeholder="Describe your project"
-                required
-              />
+              <div className="input-with-button">
+                <textarea
+                  name="projectDescription"
+                  value={formData.projectDescription}
+                  onChange={handleInputChange}
+                  className={errors.projectDescription ? 'error' : ''}
+                />
+                <button 
+                  type="button" 
+                  className="generate-btn"
+                  onClick={() => {
+                    const generatedDescription = generateProjectDescription(
+                      formData.businessUnit,
+                      formData.subUnit,
+                      formData.businessProcess
+                    );
+                    setFormData(prev => ({
+                      ...prev,
+                      projectDescription: generatedDescription
+                    }));
+                  }}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="generate-icon">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  Auto-generate
+                </button>
+              </div>
               {errors.projectDescription && <span className="error-message">{errors.projectDescription}</span>}
             </div>
           </div>
@@ -847,11 +927,46 @@ const PrivacyReview = () => {
   };
 
   const handleSubmitAssessment = () => {
-    console.log('Submitting for auto-assessment:', formData);
-    addRopaRecord(formData);
-    // Navigate to Auto Assessment
+    console.log('handleSubmitAssessment called');
+    
+    // Basic validation
+    if (!formData.projectName || !formData.businessUnit) {
+      console.error('Missing required fields');
+      return;
+    }
+
+    try {
+      const assessmentData = {
+        id: Date.now(),
+        projectName: formData.projectName || '',
+        businessUnit: formData.businessUnit === 'hr' ? 'Human Resources' : 
+                     formData.businessUnit === 'it' ? 'Information Technology' : 
+                     formData.businessUnit.charAt(0).toUpperCase() + formData.businessUnit.slice(1),
+        projectType: formData.projectType || '',
+        dueDate: formData.dueDate || new Date(),
+        dataCategories: formData.sensitiveData || [],
+        aiUsage: formData.aiUsage === 'yes' ? 'Yes' : 'No',
+        cookieUsage: formData.cookieUsage === 'yes' ? 'Yes' : 'No',
+        crossBorderTransfer: formData.crossBorderTransfer === 'yes' ? 'Yes' : 'No',
+        riskLevel: 'High', // We'll calculate this properly later
+      };
+
+      console.log('Assessment data prepared:', assessmentData);
+      
+      // Add to ROPA records
+      addRopaRecord(formData);
+      
+      // Navigate to Auto Assessment
+      navigate('/auto-assessment', { 
+        state: { assessmentData } 
+      });
+      
+    } catch (error) {
+      console.error('Error in handleSubmitAssessment:', error);
+    }
   };
 
+  // Update the render method for the submit button
   return (
     <div className="page-container">
       <div className="content-wrapper">
@@ -895,8 +1010,17 @@ const PrivacyReview = () => {
               )}
               {currentStep === 4 ? (
                 <button 
-                  className="btn btn-primary submit-btn"
+                  type="button"
+                  className="btn btn-primary"
                   onClick={handleSubmitAssessment}
+                  style={{ 
+                    cursor: 'pointer',
+                    backgroundColor: '#007bff',
+                    color: 'white',
+                    padding: '10px 20px',
+                    border: 'none',
+                    borderRadius: '4px'
+                  }}
                 >
                   Submit for Auto-Assessment
                 </button>
