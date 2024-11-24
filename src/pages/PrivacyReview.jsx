@@ -683,8 +683,16 @@ const PrivacyReview = () => {
       case 4:
         return (
           <div className="step-content summary-step">
-            <h2>Review & Submit</h2>
-            
+            <div className="page-header">
+              <h1>Review & Submit</h1>
+              <div className="sub-heading">
+                <p>Final Review</p>
+                <span className="definition">
+                  Please review all the information provided before submitting your privacy review request.
+                </span>
+              </div>
+            </div>
+
             <div className="summary-section">
               <div className="summary-header">
                 <h3>Project Information</h3>
