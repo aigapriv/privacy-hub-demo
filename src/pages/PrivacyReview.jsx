@@ -247,6 +247,59 @@ const PrivacyReview = () => {
       .join(' ');
   };
 
+  const getRiskScore = (criterion, value) => {
+    const riskMatrix = {
+      businessProcess: {
+        'financial-reporting': 'High',
+        'payroll': 'High',
+        'talent-acquisition': 'Medium',
+        default: 'Low'
+      },
+      projectType: {
+        'new-system': 'High',
+        'system-change': 'Medium',
+        'process-change': 'Medium',
+        'vendor-engagement': 'High',
+        default: 'Low'
+      },
+      dataOwnership: {
+        'us': 'Medium',
+        'uk': 'Medium',
+        'ch': 'Low',
+        default: 'High'
+      },
+      dataOperation: {
+        'us': 'Medium',
+        'uk': 'Medium',
+        'ch': 'Low',
+        default: 'High'
+      }
+    };
+
+    switch(criterion) {
+      case 'businessProcess':
+        return riskMatrix.businessProcess[value] || riskMatrix.businessProcess.default;
+      case 'projectType':
+        return riskMatrix.projectType[value] || riskMatrix.projectType.default;
+      case 'dataOwnership':
+        return riskMatrix.dataOwnership[value] || riskMatrix.dataOwnership.default;
+      case 'dataOperation':
+        return riskMatrix.dataOperation[value] || riskMatrix.dataOperation.default;
+      case 'personalData':
+        // Return Low if only personal data is selected (not sensitive)
+        return value && !formData.sensitiveData.includes('sensitive') ? 'Low' : 'Low';
+      case 'sensitiveData':
+        // Return High only if sensitive data is selected
+        return value ? 'High' : 'Low';
+      case 'aiUsage':
+        return value === 'yes' ? 'High' : 'Low';
+      case 'cookieUsage':
+        return value === 'yes' ? 'Medium' : 'Low';
+      default:
+        return 'Low';
+    }
+  };
+
   const renderStep = () => {
     switch(currentStep) {
       case 1:
@@ -714,28 +767,67 @@ const PrivacyReview = () => {
               </div>
             </div>
 
-            {formData.sensitiveData.length > 0 && (
-              <div className="summary-section risk-section">
-                <div className="summary-header">
-                  <h3>Risk Assessment</h3>
-                </div>
-                <div className="summary-content">
-                  <div className="risk-indicator high">
-                    <span className="risk-label">Data Usage</span>
-                    <span className="risk-value">High Risk</span>
-                  </div>
-                  <div className="risk-details">
-                    {formData.sensitiveData.map((item, index) => (
-                      <span key={index} className="sensitive-data-tag">
-                        {item === 'personal' ? 'Personal Categories of Data' : 
-                         item === 'sensitive' ? 'Sensitive Categories of Data' : 
-                         item.charAt(0).toUpperCase() + item.slice(1) + ' Information'}
-                      </span>
-                    ))}
-                  </div>
+            <div className="summary-section risk-section">
+              <div className="summary-header">
+                <h3>Risk Assessment</h3>
+              </div>
+              <div className="summary-content">
+                <div className="risk-details">
+                  {[
+                    {
+                      label: 'Business Process',
+                      criterion: 'businessProcess',
+                      value: formData.businessProcess,
+                    },
+                    {
+                      label: 'Project Type',
+                      criterion: 'projectType',
+                      value: formData.projectType,
+                    },
+                    {
+                      label: 'Data Ownership Location',
+                      criterion: 'dataOwnership',
+                      value: formData.dataOwnershipCountry,
+                    },
+                    {
+                      label: 'Operation Location',
+                      criterion: 'dataOperation',
+                      value: formData.country,
+                    },
+                    {
+                      label: 'Personal Categories of Data',
+                      criterion: 'personalData',
+                      value: formData.sensitiveData.includes('personal'),
+                    },
+                    {
+                      label: 'Sensitive Categories of Data',
+                      criterion: 'sensitiveData',
+                      value: formData.sensitiveData.includes('sensitive'),
+                    },
+                    {
+                      label: 'AI Usage',
+                      criterion: 'aiUsage',
+                      value: formData.aiUsage,
+                    },
+                    {
+                      label: 'Cookie Usage',
+                      criterion: 'cookieUsage',
+                      value: formData.cookieUsage,
+                    }
+                  ].map((item, index) => {
+                    const riskLevel = getRiskScore(item.criterion, item.value);
+                    return (
+                      <div key={index} className="risk-criterion">
+                        <span className="criterion-label">{item.label}</span>
+                        <span className={`risk-indicator risk-${riskLevel.toLowerCase()}`}>
+                          {riskLevel}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            )}
+            </div>
           </div>
         );
 
