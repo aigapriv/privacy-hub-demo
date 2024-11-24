@@ -8,20 +8,23 @@ import PrivacyReview from './pages/PrivacyReview';
 import AutoAssessment from './pages/AutoAssessment';
 import './styles/theme/variables.css';
 import './styles/theme/utilities.css';
+import { RopaProvider } from './context/RopaContext';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/components" element={<ComponentsPage />} />
-        <Route path="/privacy-notices" element={<PrivacyNotices />} />
-        <Route path="/ropa" element={<RopaManagement />} />
-        <Route path="/privacy-review" element={<PrivacyReview />} />
-        <Route path="/auto-assessment" element={<AutoAssessment />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </Router>
+    <RopaProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/components" element={<ComponentsPage />} />
+          <Route path="/privacy-notices" element={<PrivacyNotices />} />
+          <Route path="/ropa" element={<RopaManagement />} />
+          <Route path="/privacy-review" element={<PrivacyReview />} />
+          <Route path="/auto-assessment" element={<AutoAssessment />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
+    </RopaProvider>
   );
 }
 

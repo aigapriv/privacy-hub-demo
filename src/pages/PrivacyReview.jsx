@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import { FaInfoCircle } from 'react-icons/fa';
 import "react-datepicker/dist/react-datepicker.css";
 import '../styles/PrivacyReview.css';
+import { useRopa } from '../context/RopaContext';
 
 const subUnitOptions = {
   finance: [
@@ -136,6 +137,7 @@ const dataOwnershipCountries = [
 ];
 
 const PrivacyReview = () => {
+  const { addRopaRecord } = useRopa();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     projectName: '',
@@ -846,6 +848,8 @@ const PrivacyReview = () => {
 
   const handleSubmitAssessment = () => {
     console.log('Submitting for auto-assessment:', formData);
+    addRopaRecord(formData);
+    // Navigate to Auto Assessment
   };
 
   return (

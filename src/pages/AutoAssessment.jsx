@@ -1,7 +1,10 @@
 import React from 'react';
 import '../styles/AutoAssessment.css';
+import { useRopa } from '../context/RopaContext';
 
 const AutoAssessment = () => {
+  const { updateRopaFromAssessment } = useRopa();
+
   // Mock data from Privacy Review (replace with actual data later)
   const privacyReviewData = {
     projectName: "HR Analytics Platform",
@@ -13,6 +16,18 @@ const AutoAssessment = () => {
     cookieUsage: "Yes",
     crossBorderTransfer: "Yes",
     riskLevel: "High"
+  };
+
+  const handleStartPrivacyReview = () => {
+    const assessmentData = {
+      riskLevel: privacyReviewData.riskLevel,
+      recommendedMeasures: [
+        "Implement enhanced data protection",
+        "Review cross-border transfers",
+        "Update privacy notices"
+      ]
+    };
+    updateRopaFromAssessment(assessmentData, privacyReviewData.id);
   };
 
   return (
@@ -196,7 +211,10 @@ const AutoAssessment = () => {
                 <p className="step-description">
                   Complete a comprehensive privacy review to ensure full compliance with privacy requirements.
                 </p>
-                <button className="step-button primary">
+                <button 
+                  className="step-button primary"
+                  onClick={handleStartPrivacyReview}
+                >
                   Start Privacy Review
                   <svg className="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
