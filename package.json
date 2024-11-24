@@ -11,7 +11,9 @@
     "version": "git add -A",
     "commit": "node commit-with-pull.js",
     "server": "node src/server.js",
-    "dev:server": "nodemon src/server.js"
+    "dev:server": "nodemon src/server.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
@@ -40,5 +42,6 @@
     "globals": "^15.11.0",
     "http-proxy-middleware": "^3.0.3",
     "vite": "^5.4.10"
-  }
+  },
+  "homepage": "https://aigapriv.github.io/privacy-hub-demo"
 }

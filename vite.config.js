@@ -13,5 +13,6 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/solidatus/, '')
       }
     }
-  }
+  },
+  base: '/privacy-hub-demo/'
 })
