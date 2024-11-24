@@ -24,6 +24,216 @@ const PrivacyReview = () => {
   const totalSteps = 5;
   const progress = Math.round((currentStep / totalSteps) * 100);
 
+  const subUnitOptions = {
+    finance: [
+      { value: 'accounting', label: 'Accounting' },
+      { value: 'treasury', label: 'Treasury' },
+      { value: 'tax', label: 'Tax' },
+      { value: 'audit', label: 'Internal Audit' }
+    ],
+    hr: [
+      { value: 'recruitment', label: 'Recruitment' },
+      { value: 'compensation', label: 'Compensation & Benefits' },
+      { value: 'training', label: 'Training & Development' },
+      { value: 'employee-relations', label: 'Employee Relations' }
+    ],
+    it: [
+      { value: 'infrastructure', label: 'Infrastructure' },
+      { value: 'development', label: 'Development' },
+      { value: 'security', label: 'Security' },
+      { value: 'support', label: 'IT Support' }
+    ],
+    marketing: [
+      { value: 'digital', label: 'Digital Marketing' },
+      { value: 'brand', label: 'Brand Management' },
+      { value: 'communications', label: 'Communications' },
+      { value: 'social-media', label: 'Social Media' }
+    ],
+    operations: [
+      { value: 'production', label: 'Production' },
+      { value: 'quality', label: 'Quality Control' },
+      { value: 'logistics', label: 'Logistics' },
+      { value: 'supply-chain', label: 'Supply Chain' }
+    ],
+    sales: [
+      { value: 'direct-sales', label: 'Direct Sales' },
+      { value: 'retail', label: 'Retail' },
+      { value: 'business-dev', label: 'Business Development' },
+      { value: 'customer-service', label: 'Customer Service' }
+    ]
+  };
+
+  const businessProcessOptions = {
+    accounting: [
+      { value: 'financial-reporting', label: 'Financial Reporting' },
+      { value: 'accounts-payable', label: 'Accounts Payable' },
+      { value: 'accounts-receivable', label: 'Accounts Receivable' },
+      { value: 'general-ledger', label: 'General Ledger' },
+      { value: 'cost-accounting', label: 'Cost Accounting' }
+    ],
+    treasury: [
+      { value: 'cash-management', label: 'Cash Management' },
+      { value: 'investments', label: 'Investments' },
+      { value: 'forex', label: 'Foreign Exchange' },
+      { value: 'funding', label: 'Funding & Capital' },
+      { value: 'banking-relations', label: 'Banking Relations' }
+    ],
+    tax: [
+      { value: 'tax-planning', label: 'Tax Planning' },
+      { value: 'tax-compliance', label: 'Tax Compliance' },
+      { value: 'tax-reporting', label: 'Tax Reporting' },
+      { value: 'transfer-pricing', label: 'Transfer Pricing' },
+      { value: 'vat-management', label: 'VAT Management' }
+    ],
+    audit: [
+      { value: 'internal-controls', label: 'Internal Controls' },
+      { value: 'compliance-audit', label: 'Compliance Audit' },
+      { value: 'risk-assessment', label: 'Risk Assessment' },
+      { value: 'audit-reporting', label: 'Audit Reporting' },
+      { value: 'fraud-investigation', label: 'Fraud Investigation' }
+    ],
+    recruitment: [
+      { value: 'talent-acquisition', label: 'Talent Acquisition' },
+      { value: 'screening', label: 'Candidate Screening' },
+      { value: 'interviewing', label: 'Interviewing' },
+      { value: 'onboarding', label: 'Onboarding' },
+      { value: 'background-checks', label: 'Background Checks' }
+    ],
+    compensation: [
+      { value: 'payroll', label: 'Payroll' },
+      { value: 'benefits-admin', label: 'Benefits Administration' },
+      { value: 'salary-review', label: 'Salary Review' },
+      { value: 'rewards', label: 'Rewards & Recognition' },
+      { value: 'pension-admin', label: 'Pension Administration' }
+    ],
+    training: [
+      { value: 'skills-development', label: 'Skills Development' },
+      { value: 'compliance-training', label: 'Compliance Training' },
+      { value: 'leadership-dev', label: 'Leadership Development' },
+      { value: 'performance-mgmt', label: 'Performance Management' },
+      { value: 'career-planning', label: 'Career Planning' }
+    ],
+    'employee-relations': [
+      { value: 'grievance-handling', label: 'Grievance Handling' },
+      { value: 'disciplinary', label: 'Disciplinary Procedures' },
+      { value: 'engagement', label: 'Employee Engagement' },
+      { value: 'wellness', label: 'Employee Wellness' },
+      { value: 'union-relations', label: 'Union Relations' }
+    ],
+    infrastructure: [
+      { value: 'network-mgmt', label: 'Network Management' },
+      { value: 'server-admin', label: 'Server Administration' },
+      { value: 'cloud-ops', label: 'Cloud Operations' },
+      { value: 'backup-recovery', label: 'Backup & Recovery' },
+      { value: 'hardware-mgmt', label: 'Hardware Management' }
+    ],
+    development: [
+      { value: 'app-dev', label: 'Application Development' },
+      { value: 'testing', label: 'Testing & QA' },
+      { value: 'deployment', label: 'Deployment' },
+      { value: 'maintenance', label: 'Maintenance' },
+      { value: 'api-management', label: 'API Management' }
+    ],
+    security: [
+      { value: 'access-control', label: 'Access Control' },
+      { value: 'incident-response', label: 'Incident Response' },
+      { value: 'vulnerability-mgmt', label: 'Vulnerability Management' },
+      { value: 'security-monitoring', label: 'Security Monitoring' },
+      { value: 'penetration-testing', label: 'Penetration Testing' }
+    ],
+    support: [
+      { value: 'helpdesk', label: 'Helpdesk' },
+      { value: 'user-training', label: 'User Training' },
+      { value: 'system-access', label: 'System Access Management' },
+      { value: 'asset-mgmt', label: 'Asset Management' },
+      { value: 'change-mgmt', label: 'Change Management' }
+    ],
+    digital: [
+      { value: 'seo', label: 'Search Engine Optimization' },
+      { value: 'ppc', label: 'Pay Per Click Advertising' },
+      { value: 'email-marketing', label: 'Email Marketing' },
+      { value: 'content-mgmt', label: 'Content Management' },
+      { value: 'analytics', label: 'Digital Analytics' }
+    ],
+    brand: [
+      { value: 'brand-strategy', label: 'Brand Strategy' },
+      { value: 'visual-identity', label: 'Visual Identity' },
+      { value: 'brand-guidelines', label: 'Brand Guidelines' },
+      { value: 'brand-monitoring', label: 'Brand Monitoring' },
+      { value: 'reputation-mgmt', label: 'Reputation Management' }
+    ],
+    communications: [
+      { value: 'pr', label: 'Public Relations' },
+      { value: 'media-relations', label: 'Media Relations' },
+      { value: 'internal-comms', label: 'Internal Communications' },
+      { value: 'crisis-comms', label: 'Crisis Communications' },
+      { value: 'stakeholder-comms', label: 'Stakeholder Communications' }
+    ],
+    'social-media': [
+      { value: 'content-creation', label: 'Content Creation' },
+      { value: 'community-mgmt', label: 'Community Management' },
+      { value: 'campaign-mgmt', label: 'Campaign Management' },
+      { value: 'influencer-mgmt', label: 'Influencer Management' },
+      { value: 'social-analytics', label: 'Social Media Analytics' }
+    ],
+    production: [
+      { value: 'manufacturing', label: 'Manufacturing' },
+      { value: 'assembly', label: 'Assembly' },
+      { value: 'quality-control', label: 'Quality Control' },
+      { value: 'inventory-mgmt', label: 'Inventory Management' },
+      { value: 'production-planning', label: 'Production Planning' }
+    ],
+    quality: [
+      { value: 'quality-assurance', label: 'Quality Assurance' },
+      { value: 'quality-control', label: 'Quality Control' },
+      { value: 'compliance', label: 'Compliance' },
+      { value: 'standards-mgmt', label: 'Standards Management' },
+      { value: 'improvement', label: 'Continuous Improvement' }
+    ],
+    logistics: [
+      { value: 'warehousing', label: 'Warehousing' },
+      { value: 'transportation', label: 'Transportation' },
+      { value: 'distribution', label: 'Distribution' },
+      { value: 'fleet-mgmt', label: 'Fleet Management' },
+      { value: 'inventory-control', label: 'Inventory Control' }
+    ],
+    'supply-chain': [
+      { value: 'procurement', label: 'Procurement' },
+      { value: 'supplier-mgmt', label: 'Supplier Management' },
+      { value: 'demand-planning', label: 'Demand Planning' },
+      { value: 'contract-mgmt', label: 'Contract Management' },
+      { value: 'risk-mgmt', label: 'Risk Management' }
+    ],
+    'direct-sales': [
+      { value: 'lead-generation', label: 'Lead Generation' },
+      { value: 'sales-pipeline', label: 'Sales Pipeline Management' },
+      { value: 'account-mgmt', label: 'Account Management' },
+      { value: 'sales-forecasting', label: 'Sales Forecasting' },
+      { value: 'contract-negotiation', label: 'Contract Negotiation' }
+    ],
+    retail: [
+      { value: 'store-ops', label: 'Store Operations' },
+      { value: 'merchandising', label: 'Merchandising' },
+      { value: 'inventory-mgmt', label: 'Inventory Management' },
+      { value: 'pos-mgmt', label: 'POS Management' },
+      { value: 'customer-service', label: 'Customer Service' }
+    ],
+    'business-dev': [
+      { value: 'market-research', label: 'Market Research' },
+      { value: 'partnership-dev', label: 'Partnership Development' },
+      { value: 'strategy-planning', label: 'Strategy Planning' },
+      { value: 'opportunity-analysis', label: 'Opportunity Analysis' },
+      { value: 'growth-planning', label: 'Growth Planning' }
+    ],
+    'customer-service': [
+      { value: 'support-desk', label: 'Support Desk' },
+      { value: 'complaint-handling', label: 'Complaint Handling' },
+      { value: 'feedback-mgmt', label: 'Feedback Management' },
+      { value: 'service-quality', label: 'Service Quality' },
+      { value: 'customer-retention', label: 'Customer Retention' }
+    ]
+  };
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === 'checkbox') {
@@ -43,6 +253,15 @@ const PrivacyReview = () => {
   const handleSubmit = () => {
     console.log('Form Data:', formData);
     // Add your submission logic here
+  };
+
+  const handleBusinessUnitChange = (e) => {
+    const newBusinessUnit = e.target.value;
+    setFormData(prev => ({
+      ...prev,
+      businessUnit: newBusinessUnit,
+      subUnit: '' // Reset sub unit when business unit changes
+    }));
   };
 
   const renderStep = () => {
@@ -66,7 +285,14 @@ const PrivacyReview = () => {
               <select
                 name="businessUnit"
                 value={formData.businessUnit}
-                onChange={handleInputChange}
+                onChange={(e) => {
+                  setFormData(prev => ({
+                    ...prev,
+                    businessUnit: e.target.value,
+                    subUnit: '',
+                    businessProcess: '' // Reset both dependent fields
+                  }));
+                }}
               >
                 <option value="">Select Business Unit</option>
                 <option value="finance">Finance</option>
@@ -82,13 +308,23 @@ const PrivacyReview = () => {
               <select
                 name="subUnit"
                 value={formData.subUnit}
-                onChange={handleInputChange}
+                onChange={(e) => {
+                  setFormData(prev => ({
+                    ...prev,
+                    subUnit: e.target.value,
+                    businessProcess: '' // Reset business process when sub unit changes
+                  }));
+                }}
+                disabled={!formData.businessUnit}
               >
                 <option value="">Select Sub Unit</option>
-                <option value="team1">Team 1</option>
-                <option value="team2">Team 2</option>
-                <option value="team3">Team 3</option>
-                <option value="team4">Team 4</option>
+                {formData.businessUnit && 
+                  subUnitOptions[formData.businessUnit]?.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))
+                }
               </select>
             </div>
             <div className="form-group">
@@ -97,13 +333,16 @@ const PrivacyReview = () => {
                 name="businessProcess"
                 value={formData.businessProcess}
                 onChange={handleInputChange}
+                disabled={!formData.subUnit}
               >
                 <option value="">Select Business Process</option>
-                <option value="customer-onboarding">Customer Onboarding</option>
-                <option value="data-processing">Data Processing</option>
-                <option value="reporting">Reporting</option>
-                <option value="compliance">Compliance</option>
-                <option value="audit">Audit</option>
+                {formData.subUnit && 
+                  businessProcessOptions[formData.subUnit]?.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))
+                }
               </select>
             </div>
             <div className="form-group">
