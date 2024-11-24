@@ -99,36 +99,41 @@ const businessProcessOptions = {
     { value: 'creative', label: 'Creative Development' },
     { value: 'campaigns', label: 'Campaign Management' },
     { value: 'market-research', label: 'Market Research' }
-  ],
-  // Operations - Manufacturing processes
-  manufacturing: [
-    { value: 'production', label: 'Production Planning' },
-    { value: 'quality-control', label: 'Quality Control' },
-    { value: 'inventory', label: 'Inventory Management' },
-    { value: 'maintenance', label: 'Equipment Maintenance' }
-  ],
-  // Operations - Quality processes
-  quality: [
-    { value: 'quality-assurance', label: 'Quality Assurance' },
-    { value: 'compliance', label: 'Compliance Management' },
-    { value: 'auditing', label: 'Quality Auditing' },
-    { value: 'improvement', label: 'Process Improvement' }
-  ],
-  // Sales - Direct Sales processes
-  'direct-sales': [
-    { value: 'lead-management', label: 'Lead Management' },
-    { value: 'opportunity-mgmt', label: 'Opportunity Management' },
-    { value: 'account-mgmt', label: 'Account Management' },
-    { value: 'sales-forecasting', label: 'Sales Forecasting' }
-  ],
-  // Sales - Customer Service processes
-  'customer-service': [
-    { value: 'support', label: 'Customer Support' },
-    { value: 'complaints', label: 'Complaint Management' },
-    { value: 'feedback', label: 'Feedback Management' },
-    { value: 'satisfaction', label: 'Customer Satisfaction' }
   ]
 };
+
+const countryOptions = [
+  { value: 'us', label: 'United States' },
+  { value: 'uk', label: 'United Kingdom' },
+  { value: 'ca', label: 'Canada' },
+  { value: 'au', label: 'Australia' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'sg', label: 'Singapore' },
+  { value: 'br', label: 'Brazil' },
+  { value: 'in', label: 'India' },
+  { value: 'nl', label: 'Netherlands' },
+  { value: 'se', label: 'Sweden' }
+];
+
+const dataOwnershipCountries = [
+  { value: 'us', label: 'United States' },
+  { value: 'uk', label: 'United Kingdom' },
+  { value: 'ca', label: 'Canada' },
+  { value: 'au', label: 'Australia' },
+  { value: 'de', label: 'Germany' },
+  { value: 'fr', label: 'France' },
+  { value: 'jp', label: 'Japan' },
+  { value: 'sg', label: 'Singapore' },
+  { value: 'br', label: 'Brazil' },
+  { value: 'in', label: 'India' },
+  { value: 'nl', label: 'Netherlands' },
+  { value: 'se', label: 'Sweden' },
+  { value: 'ch', label: 'Switzerland' },
+  { value: 'es', label: 'Spain' },
+  { value: 'it', label: 'Italy' }
+];
 
 const PrivacyReview = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -140,6 +145,7 @@ const PrivacyReview = () => {
     projectDescription: '',
     projectType: '',
     country: '',
+    dataOwnershipCountry: '',
     dueDate: new Date(),
     sensitiveData: [],
     thirdPartySharing: '',
@@ -188,7 +194,8 @@ const PrivacyReview = () => {
         break;
       case 2:
         if (!formData.projectType) newErrors.projectType = 'Project type is required';
-        if (!formData.country) newErrors.country = 'Country is required';
+        if (!formData.country) newErrors.country = 'Country of operation is required';
+        if (!formData.dataOwnershipCountry) newErrors.dataOwnershipCountry = 'Country of data ownership is required';
         if (!formData.dueDate) newErrors.dueDate = 'Due date is required';
         break;
       // Add validation for other steps as needed
@@ -363,14 +370,39 @@ const PrivacyReview = () => {
                 name="country"
                 value={formData.country}
                 onChange={handleInputChange}
+                className={!formData.country ? 'unselected' : ''}
                 required
               >
                 <option value="">Select Country</option>
-                <option value="us">United States</option>
-                <option value="uk">United Kingdom</option>
-                <option value="eu">European Union</option>
+                {countryOptions.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
               {errors.country && <span className="error-message">{errors.country}</span>}
+            </div>
+
+            <div className="form-group">
+              <label className="required-field">
+                Country of Data Ownership
+                <Tooltip content="Select the country where data ownership and control resides" />
+              </label>
+              <select
+                name="dataOwnershipCountry"
+                value={formData.dataOwnershipCountry}
+                onChange={handleInputChange}
+                className={!formData.dataOwnershipCountry ? 'unselected' : ''}
+                required
+              >
+                <option value="">Select Country</option>
+                {dataOwnershipCountries.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              {errors.dataOwnershipCountry && <span className="error-message">{errors.dataOwnershipCountry}</span>}
             </div>
 
             <div className="form-group">
@@ -548,6 +580,14 @@ const PrivacyReview = () => {
                     {formData.dueDate.toLocaleDateString()}
                   </span>
                 </div>
+                <div className="summary-item">
+                  <span className="summary-label">Business Process:</span>
+                  <span className="summary-value">
+                    {formData.businessProcess && businessProcessOptions[formData.subUnit]?.find(
+                      bp => bp.value === formData.businessProcess
+                    )?.label || formData.businessProcess}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -559,15 +599,21 @@ const PrivacyReview = () => {
                 <div className="summary-item">
                   <span className="summary-label">Project Type:</span>
                   <span className="summary-value">
-                    {formData.projectType}
+                    {formData.projectType.split('-').map(word => 
+                      word.charAt(0).toUpperCase() + word.slice(1)
+                    ).join(' ')}
                   </span>
                 </div>
                 <div className="summary-item">
                   <span className="summary-label">Country of Operation:</span>
                   <span className="summary-value">
-                    {formData.country === 'us' ? 'United States' :
-                     formData.country === 'uk' ? 'United Kingdom' :
-                     formData.country === 'eu' ? 'European Union' : formData.country}
+                    {countryOptions.find(c => c.value === formData.country)?.label || formData.country}
+                  </span>
+                </div>
+                <div className="summary-item">
+                  <span className="summary-label">Country of Data Ownership:</span>
+                  <span className="summary-value">
+                    {dataOwnershipCountries.find(c => c.value === formData.dataOwnershipCountry)?.label || formData.dataOwnershipCountry}
                   </span>
                 </div>
               </div>
