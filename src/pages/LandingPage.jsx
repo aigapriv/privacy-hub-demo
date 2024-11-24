@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/LandingPage.css';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 console.log('LandingPage component is loading');
 
 const LandingPage = () => {
+  useDocumentTitle('Home');
   console.log('LandingPage is rendering');
   return (
     <div className="page">

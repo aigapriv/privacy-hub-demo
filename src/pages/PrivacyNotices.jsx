@@ -7,8 +7,11 @@ import {
   FaFlag, FaGlobeAmericas, FaGlobeEurope, FaGlobeAsia
 } from 'react-icons/fa';
 import '../styles/PrivacyNotices.css';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const PrivacyNotices = () => {
+  useDocumentTitle('Privacy Notices');
+  
   const [searchTerm, setSearchTerm] = useState('');
   
   const notices = [

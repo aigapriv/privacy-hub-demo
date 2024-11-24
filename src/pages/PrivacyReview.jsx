@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import '../styles/PrivacyReview.css';
 import { useRopa } from '../context/RopaContext';
 import { useNavigate } from 'react-router-dom';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const subUnitOptions = {
   finance: [
@@ -138,6 +139,7 @@ const dataOwnershipCountries = [
 ];
 
 const PrivacyReview = () => {
+  useDocumentTitle('Privacy Review');
   const navigate = useNavigate();
   const { addRopaRecord } = useRopa();
   const [currentStep, setCurrentStep] = useState(1);

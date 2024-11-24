@@ -9,8 +9,11 @@ import RopaDetailModal from '../components/RopaDetailModal';
 import RopaEditModal from '../components/RopaEditModal';
 import '../styles/RopaManagement.css';
 import { useRopa } from '../context/RopaContext';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const RopaManagement = () => {
+  useDocumentTitle('ROPA Management');
+
   const { ropaRecords, addRopaRecord } = useRopa();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRecord, setSelectedRecord] = useState(null);

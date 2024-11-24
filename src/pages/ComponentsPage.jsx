@@ -4,8 +4,10 @@ import { FaShieldAlt, FaDatabase, FaFileAlt, FaUserShield,
          FaCheckSquare, FaExclamationTriangle, FaCog, 
          FaRobot, FaHeadset } from 'react-icons/fa';
 import '../styles/ComponentsPage.css';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const ComponentsPage = () => {
+  useDocumentTitle('Components');
   const navigate = useNavigate();
 
   const components = [

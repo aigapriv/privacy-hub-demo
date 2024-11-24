@@ -2,8 +2,10 @@ import React from 'react';
 import '../styles/AutoAssessment.css';
 import { useRopa } from '../context/RopaContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const AutoAssessment = () => {
+  useDocumentTitle('Auto Assessment');
   const { updateRopaFromAssessment, addRopaRecord } = useRopa();
   const location = useLocation();
   const navigate = useNavigate();
