@@ -86,13 +86,29 @@ const AutoAssessment = () => {
 
   return (
     <div className="page-container">
-      <div className="content-wrapper">
-        <div className="page-header">
+      <div className="content-wrapper" style={{ marginTop: '120px' }}>
+        <div className="page-header" style={{ 
+          marginBottom: '28px',
+          paddingTop: '64px'
+        }}>
           <h1>Auto-Assessment</h1>
-          <div className="sub-heading">
-            <p>Automated Privacy Impact Assessment</p>
-            <span className="definition">
-              AI-powered privacy risk analysis and recommendations
+          <div className="sub-heading" style={{
+            textAlign: 'right',
+            marginLeft: 'auto',  /* Pushes content to the right */
+            maxWidth: '60%'      /* Limits width for better readability */
+          }}>
+            <p style={{
+              margin: '0',
+              fontSize: '16px',
+              fontWeight: '500',
+              color: '#5cc5ae'
+            }}>AI-Powered Risk Analysis</p>
+            <span className="definition" style={{
+              display: 'block',
+              fontSize: '14px',
+              color: '#FFFFFF'
+            }}>
+              Automated assessment of privacy risks and compliance requirements based on your project details.
             </span>
           </div>
         </div>
@@ -226,19 +242,37 @@ const AutoAssessment = () => {
           <div className="assessment-card recommendations-card">
             <h2>Recommendations</h2>
             <div className="recommendations-list">
-              <div className="recommendation">
+              <div className="recommendation" style={{
+                boxShadow: '0 2px 8px rgba(220, 53, 69, 0.15)',
+                border: '1px solid rgba(220, 53, 69, 0.1)',
+                borderRadius: '8px',
+                padding: '16px',
+                marginBottom: '16px'
+              }}>
                 <div className="recommendation-header">
                   <span className="priority high">High Priority</span>
                 </div>
                 <p>Implement enhanced data protection measures for AI processing activities</p>
               </div>
-              <div className="recommendation">
+              <div className="recommendation" style={{
+                boxShadow: '0 2px 8px rgba(255, 193, 7, 0.15)',
+                border: '1px solid rgba(255, 193, 7, 0.1)',
+                borderRadius: '8px',
+                padding: '16px',
+                marginBottom: '16px'
+              }}>
                 <div className="recommendation-header">
                   <span className="priority medium">Medium Priority</span>
                 </div>
                 <p>Review and update cross-border data transfer agreements</p>
               </div>
-              <div className="recommendation">
+              <div className="recommendation" style={{
+                boxShadow: '0 2px 8px rgba(40, 167, 69, 0.15)',
+                border: '1px solid rgba(40, 167, 69, 0.1)',
+                borderRadius: '8px',
+                padding: '16px',
+                marginBottom: '16px'
+              }}>
                 <div className="recommendation-header">
                   <span className="priority low">Low Priority</span>
                 </div>
