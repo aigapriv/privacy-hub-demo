@@ -126,17 +126,33 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.1);
+  width: 36px;
+  height: 36px;
   border-radius: 12px;
+  background: transparent;
   margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .card-icon {
-  font-size: 24px;
-  color: var(--color-teal-green);
+  width: 10px;
+  height: 10px;
+  color: #10B981;
+  background: transparent !important;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.card-icon svg {
+  background: transparent !important;
+}
+
+.card-icon path {
+  background: transparent !important;
+}
+
+[class*="fa-"] {
+  background: transparent !important;
 }
 
 .component-card:hover {

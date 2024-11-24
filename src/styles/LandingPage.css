@@ -145,7 +145,32 @@ p {
 .button {
   display: inline-block;
   padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 500;
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.button.primary {
+  background: linear-gradient(135deg, var(--teal-green) 0%, var(--teal-light) 100%);
+  color: var(--white);
+  border: none;
+}
+
+.button.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 168, 155, 0.3);
+}
+
+.button.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 /* Responsive adjustments */
