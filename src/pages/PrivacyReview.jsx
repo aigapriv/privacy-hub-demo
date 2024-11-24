@@ -194,6 +194,7 @@ const PrivacyReview = () => {
                 name="businessUnit"
                 value={formData.businessUnit}
                 onChange={handleBusinessUnitChange}
+                className={!formData.businessUnit ? 'unselected' : ''}
                 required
               >
                 <option value="">Select Business Unit</option>
@@ -216,6 +217,7 @@ const PrivacyReview = () => {
                 name="subUnit"
                 value={formData.subUnit}
                 onChange={handleSubUnitChange}
+                className={!formData.subUnit ? 'unselected' : ''}
                 required
                 disabled={!formData.businessUnit}
               >
@@ -240,6 +242,7 @@ const PrivacyReview = () => {
                 name="businessProcess"
                 value={formData.businessProcess}
                 onChange={handleInputChange}
+                className={!formData.businessProcess ? 'unselected' : ''}
                 required
                 disabled={!formData.subUnit}
               >

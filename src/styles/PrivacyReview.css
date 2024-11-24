@@ -438,3 +438,49 @@ select:disabled {
   color: var(--color-text);
   font-size: 0.95rem;
 }
+
+/* Dropdown Styles */
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-input-background);
+  color: var(--color-text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e1e1e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+/* Style for the initial unselected state */
+select.unselected,
+select:invalid {
+  color: rgba(225, 225, 225, 0.5); /* More transparent text */
+}
+
+/* Dropdown options styling */
+select option {
+  background-color: var(--color-card-background);
+  color: var(--color-text);
+  padding: 0.75rem;
+}
+
+/* Hide the placeholder when dropdown is open */
+select:focus option[value=""] {
+  display: none;
+}
+
+/* Style for the placeholder option */
+select option[value=""] {
+  color: rgba(225, 225, 225, 0.5);
+}
+
+/* Style for actual options */
+select option:not([value=""]) {
+  color: var(--color-text);
+}
